@@ -1,15 +1,16 @@
-import { createBrowserRouter } from "react-router-dom"
-import MainLayout from "../layouts/MainLayout"
+import { createHashRouter } from "react-router-dom";
+import MainLayout from "../layouts/MainLayout";
 
 // Pages
-import Home from "../pages/Home/Home"
-import About from "../pages/About"
-import Services from "../pages/Services/Services"
-import Infrastructure from "../pages/Infrastructure"
-import Contact from "../pages/Contact"
-import Certificates from "../pages/Certificates"
+import Home from "../pages/Home/Home";
+import About from "../pages/About";
+import Services from "../pages/Services/Services";
+import Infrastructure from "../pages/Infrastructure";
+import Contact from "../pages/Contact";
+import Certificates from "../pages/Certificates";
 
-export const router = createBrowserRouter([
+// Use HashRouter to prevent 404s on GitHub Pages
+export const router = createHashRouter([
   {
     path: "/",
     element: <MainLayout />,
@@ -18,9 +19,8 @@ export const router = createBrowserRouter([
       { path: "/about", element: <About /> },
       { path: "/services", element: <Services /> },
       { path: "/infrastructure", element: <Infrastructure /> },
-      { path: "/contact", element: <Contact /> },
       { path: "/certificates", element: <Certificates /> },
-
+      { path: "/contact", element: <Contact /> },
     ],
   },
-])
+]);
