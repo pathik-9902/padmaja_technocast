@@ -8,7 +8,7 @@ const industries = [
     materials: "SS304, SS316, EN Series, Copper Alloys",
     description:
       "Our defence components are designed with high precision and manufactured to meet the exact requirements of the defence industry.",
-    image: "/images/industries/industries1.webp",
+    image: `${import.meta.env.BASE_URL}images/industries/industries1.webp`,
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const industries = [
     materials: "SS304, SS316, EN Series, Copper Alloys",
     description:
       "We offer a wide range of product castings in Carbon Steel, Nickel Based Alloy, Stainless Steel, AAR M201 Grade E for Indian Railways.",
-    image: "/images/industries/industries2.webp",
+    image: `${import.meta.env.BASE_URL}images/industries/industries2.webp`,
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const industries = [
     materials: "SS304, SS316, MS, EN Series",
     description:
       "12+ years of experience makes us a leading supplier of investment casting in the automobile sector with precision manufacturing facilities.",
-    image: "/images/industries/industries3.webp",
+    image: `${import.meta.env.BASE_URL}images/industries/industries3.webp`,
   },
   {
     id: 4,
@@ -35,7 +35,7 @@ const industries = [
     materials: "SS304, SS316, SS316L, Other Special Grades",
     description:
       "We manufacture and supply orthopedic implants and instruments casting as per customer specifications in stainless steel and special grades.",
-    image: "/images/industries/industries4.webp",
+    image: `${import.meta.env.BASE_URL}images/industries/industries4.webp`,
   },
   {
     id: 5,
@@ -44,7 +44,7 @@ const industries = [
     materials: "SS304, SS316, SS316L",
     description:
       "We design and manufacture a wide range of valves like Gate, Ball, Check, and Butterfly valves for Oil & Gas applications.",
-    image: "/images/industries/industries5.webp",
+    image: `${import.meta.env.BASE_URL}images/industries/industries5.webp`,
   },
   {
     id: 6,
@@ -53,7 +53,7 @@ const industries = [
     materials: "SS304, SS316, Other Steel Alloys",
     description:
       "Camlock couplings ensure quick connection/disconnection of hoses for water, air, gas, and oil applications.",
-    image: "/images/industries/industries6.webp",
+    image: `${import.meta.env.BASE_URL}images/industries/industries6.webp`,
   },
   {
     id: 7,
@@ -62,7 +62,7 @@ const industries = [
     materials: "SS304, SS316, Other Steel Alloys",
     description:
       "We manufacture anchors, rod holders, deck hinges, turnbuckles, and more in SS304, SS316, and other alloys.",
-    image: "/images/industries/industries7.webp",
+    image: `${import.meta.env.BASE_URL}images/industries/industries7.webp`,
   },
   {
     id: 8,
@@ -71,7 +71,7 @@ const industries = [
     materials: "SS304, SS316, SS410, MS, Copper Alloys",
     description:
       "We supply spider fittings, railing fittings, door handles, knockers, and more in multiple alloys.",
-    image: "/images/industries/industries8.webp",
+    image: `${import.meta.env.BASE_URL}images/industries/industries8.webp`,
   },
   {
     id: 9,
@@ -80,7 +80,7 @@ const industries = [
     materials: "SS304, SS316, Copper Alloys",
     description:
       "We manufacture hydrant valves, branch pipe nozzles, and other fire safety components for commercial and residential use.",
-    image: "/images/industries/industries9.webp",
+    image: `${import.meta.env.BASE_URL}images/industries/industries9.webp`,
   },
 ];
 
