@@ -2,7 +2,7 @@
 
 import Slider from "react-slick";
 import { ArrowLeft, ArrowRight, Download } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const slides = [
   {
@@ -62,6 +62,18 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Stable particles
+  const particles = useMemo(
+    () =>
+      [...Array(30)].map(() => ({
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        duration: `${2 + Math.random() * 3}s`,
+        delay: `${Math.random() * 2}s`,
+      })),
+    []
+  );
+
   const settings = {
     dots: true,
     infinite: true,
@@ -88,17 +100,17 @@ export default function Hero() {
     <section className="relative w-full h-[90vh] md:h-[95vh] overflow-hidden">
       {/* Floating particles */}
       <div className="absolute inset-0 z-10 pointer-events-none">
-        {[...Array(30)].map((_, i) => (
+        {particles.map((p, i) => (
           <span
             key={i}
             className="absolute w-1.5 h-1.5 bg-black/30 rounded-full animate-float"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDuration: `${2 + Math.random() * 3}s`,
-              animationDelay: `${Math.random() * 2}s`,
+              top: p.top,
+              left: p.left,
+              animationDuration: p.duration,
+              animationDelay: p.delay,
             }}
-          ></span>
+          />
         ))}
       </div>
 
@@ -108,21 +120,21 @@ export default function Hero() {
             key={slide.id}
             className="relative h-[90vh] md:h-[95vh] w-full"
             tabIndex={activeSlide === index ? 0 : -1}
-            aria-hidden={activeSlide === index ? "false" : "true"}
-            {...(activeSlide !== index ? { inert: true } : {})}
+            aria-hidden={activeSlide !== index}
           >
             {/* Background image */}
-            <div
-              className="absolute inset-0 bg-cover bg-center will-change-transform"
+            <img
+              src={slide.image}
+              alt={slide.heading}
+              className="absolute inset-0 w-full h-full object-cover will-change-transform"
               style={{
-                backgroundImage: `url(${slide.image})`,
                 transform: `translateY(${offsetY * 0.2}px)`,
                 transition: "transform 0.3s ease-out",
               }}
             />
 
             {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="absolute inset-0 bg-black/50" />
 
             {/* Hero content */}
             {activeSlide === index && (
