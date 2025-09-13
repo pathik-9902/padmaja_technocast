@@ -2,13 +2,14 @@
 
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Certificates() {
   const certificates = [
-    { title: "ISO 9001 Certification", year: "2015", file: "/certificates/iso9001.pdf" },
-    { title: "IATF 16949 Certification", year: "2022", file: "/certificates/iatf16949.pdf" },
-    { title: "Environmental Compliance", year: "2021", file: "/certificates/env-compliance.pdf" },
-    { title: "Safety & Quality Standard", year: "2019", file: "/certificates/safety-quality.pdf" },
+    { title: "ISO 9001 Certification", year: "2015", file: "/certificates/iso9001.pdf", image: "/images/certificates/iso9001.webp" },
+    { title: "IATF 16949 Certification", year: "2022", file: "/certificates/iatf16949.pdf", image: "/images/certificates/iatf16949.webp" },
+    { title: "Environmental Compliance", year: "2021", file: "/certificates/env-compliance.pdf", image: "/images/certificates/env-compliance.webp" },
+    { title: "Safety & Quality Standard", year: "2019", file: "/certificates/safety-quality.pdf", image: "/images/certificates/safety-quality.webp" },
   ];
 
   return (
@@ -49,7 +50,7 @@ export default function Certificates() {
                 transition={{ delay: index * 0.2, duration: 0.6 }}
               >
                 <img
-                  src="#" // replace with certificate preview image
+                  src={cert.image}
                   alt={cert.title}
                   className="w-full h-96 object-cover"
                 />
@@ -90,13 +91,18 @@ export default function Certificates() {
         >
           Explore our certifications and see why Padmaja Technocast is a trusted industrial partner globally.
         </motion.p>
-        <motion.a
-          href="/contact"
-          className="inline-block bg-red-600 text-white font-semibold px-6 py-3 rounded-md shadow hover:bg-red-500 transition"
-          whileHover={{ scale: 1.05 }}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
         >
-          Get in Touch
-        </motion.a>
+          <Link
+            to="/contact"
+            className="inline-block bg-red-600 text-white font-semibold px-6 py-3 rounded-md shadow hover:bg-red-500 transition"
+          >
+            Get in Touch
+          </Link>
+        </motion.div>
       </section>
     </div>
   );
