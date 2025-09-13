@@ -1,4 +1,3 @@
-// src/router.tsx
 import { createBrowserRouter } from "react-router-dom"
 import MainLayout from "../layouts/MainLayout"
 
@@ -10,11 +9,10 @@ import Infrastructure from "../pages/Infrastructure"
 import Contact from "../pages/Contact"
 import Certificates from "../pages/Certificates"
 
-// ✅ Pass routes as first argument, and options (basename) as second argument
 export const router = createBrowserRouter(
   [
     {
-      path: "/padmaja_technocast",
+      path: "/",
       element: <MainLayout />,
       children: [
         { path: "/", element: <Home /> },
@@ -27,6 +25,6 @@ export const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/padmaja_technocast", // ✅ Correct placement
+    basename: "/padmaja_technocast", // handles repo path
   }
 )
