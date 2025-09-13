@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react-swc'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/',
+  base: '/padmaja_technocast/',
   plugins: [react()],
   server: {
     host: '0.0.0.0', // Allows access from other devices on the network
