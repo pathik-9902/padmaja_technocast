@@ -25,5 +25,6 @@ export const router = createBrowserRouter(
     },
   ],
   {
-    basename: "/padmaja_technocast", 
+    basename: "/padmaja_technocast", // 👈 this is the fix
+  }
 );
