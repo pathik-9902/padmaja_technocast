@@ -7,19 +7,19 @@ import { useEffect, useMemo, useState } from "react";
 const slides = [
   {
     id: 1,
-    image: "/images/hero/hero1.jpeg",
+    image: `${import.meta.env.BASE_URL}images/hero/hero1.jpeg`,
     heading: "Excellence in Precision Investment Castings",
     text: "Delivering high-quality, durable, and technologically advanced castings to industries worldwide.",
   },
   {
     id: 2,
-    image: "/images/hero/hero2.jpeg",
+    image: `${import.meta.env.BASE_URL}images/hero/hero2.jpeg`,
     heading: "Engineering Innovation & Expertise",
     text: "Combining modern technology with skilled craftsmanship to create complex, reliable components.",
   },
   {
     id: 3,
-    image: "/images/hero/hero3.jpeg",
+    image: `${import.meta.env.BASE_URL}images/hero/hero3.jpeg`,
     heading: "Global Quality Standards",
     text: "ISO 9001:2015 certified manufacturing ensuring consistency, precision, and timely delivery.",
   },

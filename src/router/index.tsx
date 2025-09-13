@@ -9,22 +9,18 @@ import Infrastructure from "../pages/Infrastructure"
 import Contact from "../pages/Contact"
 import Certificates from "../pages/Certificates"
 
-export const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <MainLayout />,
-      children: [
-        { path: "/", element: <Home /> },
-        { path: "about", element: <About /> },
-        { path: "services", element: <Services /> },
-        { path: "infrastructure", element: <Infrastructure /> },
-        { path: "contact", element: <Contact /> },
-        { path: "certificates", element: <Certificates /> },
-      ],
-    },
-  ],
+export const router = createBrowserRouter([
   {
-    basename: "/padmaja_technocast", // handles repo path
-  }
-)
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/about", element: <About /> },
+      { path: "/services", element: <Services /> },
+      { path: "/infrastructure", element: <Infrastructure /> },
+      { path: "/contact", element: <Contact /> },
+      { path: "/certificates", element: <Certificates /> },
+
+    ],
+  },
+])
