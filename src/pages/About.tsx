@@ -5,10 +5,10 @@ import { Factory, Award, Users, Linkedin, Calendar } from "lucide-react";
 
 export default function About() {
   const team = [
-    { name: "Mr. Hitesh Ranpariya", role: "Chief Financial Officer", image: "/images/about/person1.jpeg", linkedin: "#" },
-    { name: "Mr. Krish Kotadiya", role: "Chief Marketing Officer", image: "/images/about/person2.jpeg", linkedin: "#" },
-    { name: "Mr. Jashmin Chovatiya", role: "Chief Operating Officer", image: "/images/about/person3.jpeg", linkedin: "#" },
-    { name: "Mr. Rajesh Shendge", role: "Manager-Marketing", image: "/images/about/person4.jpeg", linkedin: "#" },
+    { name: "Mr. Hitesh Ranpariya", role: "Chief Financial Officer", image: `${import.meta.env.BASE_URL}images/about/person1.jpeg`, linkedin: "#" },
+    { name: "Mr. Krish Kotadiya", role: "Chief Marketing Officer", image: `${import.meta.env.BASE_URL}images/about/person2.jpeg`, linkedin: "#" },
+    { name: "Mr. Jashmin Chovatiya", role: "Chief Operating Officer", image: `${import.meta.env.BASE_URL}images/about/person3.jpeg`, linkedin: "#" },
+    { name: "Mr. Rajesh Shendge", role: "Manager-Marketing", image: `${import.meta.env.BASE_URL}images/about/person4.jpeg`, linkedin: "#" },
   ];
 
   const milestones = [

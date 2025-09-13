@@ -3,25 +3,25 @@
 const projects = [
   {
     id: 1,
-    image: "/images/projects/project1.jpg",
+    image: `${import.meta.env.BASE_URL}images/projects/project1.jpg`,
     title: "Steel Casting Plant",
     category: "Industrial",
   },
   {
     id: 2,
-    image: "/images/projects/project2.jpg",
+    image: `${import.meta.env.BASE_URL}images/projects/project2.jpg`,
     title: "Heavy Machinery Parts",
     category: "Engineering",
   },
   {
     id: 3,
-    image: "/images/projects/project3.jpg",
+    image: `${import.meta.env.BASE_URL}images/projects/project3.jpg`,
     title: "Automotive Components",
     category: "Automobile",
   },
   {
     id: 4,
-    image: "/images/projects/project4.jpg",
+    image: `${import.meta.env.BASE_URL}images/projects/project4.jpg`,
     title: "Energy Equipment",
     category: "Energy",
   },

@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 type Customer = { id: number; logo: string; name: string };
 
 const customers: Customer[] = [
-  { id: 1, logo: "/images/customers/customers1.webp", name: "Customer 1" },
-  { id: 2, logo: "/images/customers/customers2.webp", name: "Customer 2" },
-  { id: 3, logo: "/images/customers/customers3.webp", name: "Customer 3" },
-  { id: 4, logo: "/images/customers/customers4.webp", name: "Customer 4" },
-  { id: 5, logo: "/images/customers/customers5.webp", name: "Customer 5" },
-  { id: 6, logo: "/images/customers/customers6.webp", name: "Customer 6" },
-  { id: 7, logo: "/images/customers/customers7.webp", name: "Customer 7" },
-  { id: 8, logo: "/images/customers/customers8.webp", name: "Customer 8" },
+  { id: 1, logo: `${import.meta.env.BASE_URL}images/customers/customers1.webp`, name: "Customer 1" },
+  { id: 2, logo: `${import.meta.env.BASE_URL}images/customers/customers2.webp`, name: "Customer 2" },
+  { id: 3, logo: `${import.meta.env.BASE_URL}images/customers/customers3.webp`, name: "Customer 3" },
+  { id: 4, logo: `${import.meta.env.BASE_URL}images/customers/customers4.webp`, name: "Customer 4" },
+  { id: 5, logo: `${import.meta.env.BASE_URL}images/customers/customers5.webp`, name: "Customer 5" },
+  { id: 6, logo: `${import.meta.env.BASE_URL}images/customers/customers6.webp`, name: "Customer 6" },
+  { id: 7, logo: `${import.meta.env.BASE_URL}images/customers/customers7.webp`, name: "Customer 7" },
+  { id: 8, logo: `${import.meta.env.BASE_URL}images/customers/customers8.webp`, name: "Customer 8" },
 ];
 
 // Duplicate array to create infinite scroll
