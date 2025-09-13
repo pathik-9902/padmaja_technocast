@@ -3,6 +3,7 @@
 import Slider from "react-slick";
 import { ArrowLeft, ArrowRight, Download } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 
 const slides = [
   {
@@ -55,14 +56,12 @@ export default function Hero() {
   const [offsetY, setOffsetY] = useState(0);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  // Parallax scroll
   useEffect(() => {
     const handleScroll = () => setOffsetY(window.scrollY * 0.2);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Stable particles
   const particles = useMemo(
     () =>
       [...Array(30)].map(() => ({
@@ -122,7 +121,6 @@ export default function Hero() {
             tabIndex={activeSlide === index ? 0 : -1}
             aria-hidden={activeSlide !== index}
           >
-            {/* Background image */}
             <img
               src={slide.image}
               alt={slide.heading}
@@ -133,10 +131,8 @@ export default function Hero() {
               }}
             />
 
-            {/* Dark overlay */}
             <div className="absolute inset-0 bg-black/50" />
 
-            {/* Hero content */}
             {activeSlide === index && (
               <div className="relative z-20 flex items-center justify-center h-full">
                 <div className="text-center text-white px-4 sm:px-6 max-w-2xl md:max-w-3xl lg:max-w-4xl">
@@ -147,6 +143,7 @@ export default function Hero() {
                     {slide.text}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+                    {/* Static file download */}
                     <a
                       href="/brochure.pdf"
                       download
@@ -154,12 +151,14 @@ export default function Hero() {
                     >
                       <Download className="w-5 h-5" /> Download Brochure
                     </a>
-                    <a
-                      href="/contact"
+
+                    {/* Internal navigation using React Router */}
+                    <Link
+                      to="/contact"
                       className="bg-white text-black px-5 py-3 sm:px-6 sm:py-3 rounded-md font-semibold hover:bg-gray-200 transition shadow-lg text-sm sm:text-base"
                     >
                       Contact Us
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

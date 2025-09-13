@@ -1,4 +1,5 @@
 "use client";
+import { Link } from "react-router-dom";
 
 const industries = [
   {
@@ -112,7 +113,9 @@ export default function IndustriesSection() {
                 <h3 className="text-lg sm:text-xl font-semibold text-[#111111] mb-1">
                   {industry.title}
                 </h3>
-                <p className="text-sm text-[#4B5563] mb-1">{industry.category}</p>
+                <p className="text-sm text-[#4B5563] mb-1">
+                  {industry.category}
+                </p>
                 <p className="text-sm text-[#4B5563] mb-1">
                   <span className="font-medium">Mat:</span> {industry.materials}
                 </p>
@@ -120,12 +123,13 @@ export default function IndustriesSection() {
                   {industry.description}
                 </p>
 
-                <a
-                  href="#"
+                {/* Updated Link for React Router */}
+                <Link
+                  to={`/industries/${industry.id}`}
                   className="inline-block px-3 py-1.5 bg-[#DC2626] text-white text-sm font-medium rounded-lg hover:bg-[#EF4444] transition-all duration-300"
                 >
                   Learn More
-                </a>
+                </Link>
               </div>
             </div>
           ))}

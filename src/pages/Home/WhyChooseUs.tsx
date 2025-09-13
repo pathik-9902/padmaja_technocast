@@ -73,7 +73,7 @@ export default function WhyChooseUs() {
             className="rounded-lg shadow-lg object-cover h-56 w-full hover:scale-105 transition-transform duration-300"
           />
           <motion.img
-            src={`${import.meta.env.BASE_URL}images/whychooseus/img2.jpg`}
+            src={`${import.meta.env.BASE_URL}images/whychooseus/img1.jpg`}
             alt="Advanced Manufacturing Plant"
             className="rounded-lg shadow-lg object-cover h-56 w-full hover:scale-105 transition-transform duration-300"
           />

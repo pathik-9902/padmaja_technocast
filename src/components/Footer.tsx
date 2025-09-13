@@ -1,4 +1,5 @@
 import { Facebook, Twitter, Linkedin, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -24,12 +25,12 @@ export default function Footer() {
               { label: "Contact", href: "/contact" },
             ].map((link) => (
               <li key={link.href}>
-                <a
-                  href={link.href}
+                <Link
+                  to={link.href}
                   className="relative text-[#111111] font-medium hover:text-[#DC2626] transition-colors duration-300 after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-[#DC2626] after:transition-all after:duration-300 hover:after:w-full"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -58,7 +59,7 @@ export default function Footer() {
           <div className="flex space-x-4">
             {[Facebook, Twitter, Linkedin, Mail].map((Icon, idx) => {
               const hrefs = [
-                "/",
+                "/", // optionally replace with real social links
                 "/",
                 "/",
                 "mailto:padmajatechnocast@gmail.com",
@@ -68,6 +69,7 @@ export default function Footer() {
                   key={idx}
                   href={hrefs[idx]}
                   className="text-[#4B5563] hover:text-[#DC2626] transform hover:scale-110 transition-all duration-300"
+                  target={idx === 3 ? "_blank" : undefined} // mailto opens in default email
                 >
                   <Icon />
                 </a>

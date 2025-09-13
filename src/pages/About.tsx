@@ -6,9 +6,9 @@ import { Factory, Award, Users, Linkedin, Calendar } from "lucide-react";
 export default function About() {
   const team = [
     { name: "Mr. Hitesh Ranpariya", role: "Chief Financial Officer", image: `${import.meta.env.BASE_URL}images/about/person1.jpeg`, linkedin: "#" },
-    { name: "Mr. Krish Kotadiya", role: "Chief Marketing Officer", image: `${import.meta.env.BASE_URL}images/about/person2.jpeg`, linkedin: "#" },
-    { name: "Mr. Jashmin Chovatiya", role: "Chief Operating Officer", image: `${import.meta.env.BASE_URL}images/about/person3.jpeg`, linkedin: "#" },
-    { name: "Mr. Rajesh Shendge", role: "Manager-Marketing", image: `${import.meta.env.BASE_URL}images/about/person4.jpeg`, linkedin: "#" },
+    { name: "Mr. Krish Kotadiya", role: "Chief Marketing Officer", image: `${import.meta.env.BASE_URL}images/about/person1.jpeg`, linkedin: "#" },
+    { name: "Mr. Jashmin Chovatiya", role: "Chief Operating Officer", image: `${import.meta.env.BASE_URL}images/about/person1.jpeg`, linkedin: "#" },
+    { name: "Mr. Rajesh Shendge", role: "Manager-Marketing", image: `${import.meta.env.BASE_URL}images/about/person1.jpeg`, linkedin: "#" },
   ];
 
   const milestones = [
@@ -53,7 +53,7 @@ export default function About() {
       {/* About / Company Info */}
       <section className="py-20 container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         <motion.img
-          src="/images/about/about.jpg"
+          src={`${import.meta.env.BASE_URL}images/about/about.jpg`}
           alt="Padmaja Technocast Plant"
           className="rounded-2xl shadow hover:shadow-gray-400 transition"
           initial={{ opacity: 0, x: -40 }}
