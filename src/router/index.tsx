@@ -14,7 +14,7 @@ import Certificates from "../pages/Certificates"
 export const router = createBrowserRouter(
   [
     {
-      path: "/",
+      path: "/padmaja_technocast",
       element: <MainLayout />,
       children: [
         { path: "/", element: <Home /> },
