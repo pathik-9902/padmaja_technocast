@@ -8,60 +8,54 @@ import IndustriesSection from "./IndustriesSection";
 import StatsSection from "./StatsSection";
 import WhyChooseUs from "./WhyChooseUs";
 import CoreFeatures from "./CoreFeatures";
-import Customers from "./Customers";
 import ContactUs from "./ContactUs";
 
 export default function Home() {
   return (
-    <main className="font-sans text-gray-900 bg-white">
+    <main>
 
       {/* Hero Section */}
-      <section className="bg-white shadow-md">
+      <section>
         <Hero />
       </section>
 
       {/* Welcome / About Section */}
-      <section className="bg-white">
+      <section>
         <WelcomeSection />
       </section>
 
       {/* Services Section */}
-      <section className="bg-gray-100">
+      <section>
         <ServicesSection />
       </section>
 
       {/* Projects / Portfolio Section */}
-      <section className="bg-white">
+      <section>
         <ProjectsSection />
       </section>
 
       {/* Industries Section */}
-      <section className="bg-gray-100">
+      <section>
         <IndustriesSection />
       </section>
 
       {/* Stats / Numbers Section */}
-      <section className="bg-white">
+      <section>
         <StatsSection />
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="bg-gray-100">
+      <section>
         <WhyChooseUs />
       </section>
 
       {/* Core Features Section */}
-      <section className="bg-white">
+      <section>
         <CoreFeatures />
       </section>
 
-      {/* Customers / Partners Section */}
-      <section className="bg-gray-100">
-        <Customers />
-      </section>
-
       {/* Contact Section */}
-      <section className="bg-white">
+      <section>
         <ContactUs />
       </section>
 

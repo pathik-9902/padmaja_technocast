@@ -1,5 +1,6 @@
 "use client";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const industries = [
   {
@@ -87,51 +88,57 @@ const industries = [
 
 export default function IndustriesSection() {
   return (
-    <section className="py-10 sm:py-12">
-      <div className="container mx-auto px-4">
+    <section className="relative py-16 min-h-screen overflow-hidden">
+      {/* ---------- Premium Dynamic Metallic Background ---------- */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#2b2b2b] to-[#1a1a1a]" />
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-25 mix-blend-overlay" />
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/noise.png')] opacity-10 animate-[pulse_8s_infinite]" />
+      <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-white/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none" />
+
+      <div className="relative z-10 container mx-auto px-4">
         {/* Section Heading */}
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-center text-[#111111] mb-8">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-center bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400 drop-shadow-lg mb-12">
           Industries We Serve
         </h2>
 
         {/* Industries Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {industries.map((industry) => (
-            <div
+            <motion.div
               key={industry.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-transform transform hover:scale-105"
+              whileHover={{ scale: 1.05, y: -6 }}
+              transition={{ type: "spring", stiffness: 200, damping: 12, duration: 0.2 }}
+              className="relative group rounded-3xl p-0 backdrop-blur-2xl bg-white/10 border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] overflow-hidden transition-all duration-500"
             >
+              {/* subtle glass shine */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
               {/* Image */}
               <img
                 src={industry.image}
                 alt={industry.title}
-                className="w-full h-32 sm:h-36 object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-36 object-cover transition-transform duration-500 group-hover:scale-105"
               />
 
               {/* Content */}
-              <div className="p-3 sm:p-4">
-                <h3 className="text-lg sm:text-xl font-semibold text-[#111111] mb-1">
-                  {industry.title}
-                </h3>
-                <p className="text-sm text-[#4B5563] mb-1">
-                  {industry.category}
-                </p>
-                <p className="text-sm text-[#4B5563] mb-1">
+              <div className="p-5 text-center">
+                <h3 className="text-xl font-semibold text-white mb-2">{industry.title}</h3>
+                <p className="text-gray-300 text-sm mb-1">{industry.category}</p>
+                <p className="text-gray-300 text-sm mb-1">
                   <span className="font-medium">Mat:</span> {industry.materials}
                 </p>
-                <p className="text-sm text-[#4B5563] mb-2 line-clamp-2">
-                  {industry.description}
-                </p>
+                <p className="text-gray-300 text-sm mb-4 line-clamp-2">{industry.description}</p>
 
-                {/* Updated Link for React Router */}
+                {/* Glassmorphism Button */}
                 <Link
                   to={`/industries/${industry.id}`}
-                  className="inline-block px-3 py-1.5 bg-[#DC2626] text-white text-sm font-medium rounded-lg hover:bg-[#EF4444] transition-all duration-300"
+                  className="inline-block px-4 py-2 backdrop-blur-2xl bg-white/10 border border-white/20 text-white text-sm font-semibold rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] transition-all duration-300"
                 >
                   Learn More
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

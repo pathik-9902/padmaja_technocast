@@ -1,116 +1,147 @@
 "use client";
 
 import * as FaIcons from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const infrastructureData = [
   {
     id: 1,
     title: "Tool Design & Manufacturing",
-    icon: <FaIcons.FaTools className="w-6 h-6 text-red-600" />,
+    icon: <FaIcons.FaTools />,
     description:
-      "Tooling design is an essential part of the design process. It is a prototypical model of a tool that manufacturers use to create parts and tools. Tooling design plays a crucial role as it affects the quality of production in the end-user industry.",
+      "Tooling design is a crucial part of the casting process, defining the precision, repeatability, and final quality of production.",
   },
   {
     id: 2,
     title: "Wax Injection",
-    icon: <FaIcons.FaFire className="w-6 h-6 text-red-600" />,
+    icon: <FaIcons.FaFire />,
     description:
-      "A heat-disposable wax is injected into a metal die and then subsequently removed from the die to provide a wax replica of the desired geometry.",
+      "A heat-disposable wax is injected into a precision metal die, forming the initial replica of the part to be cast.",
   },
   {
     id: 3,
     title: "Wax Assembly",
-    icon: <FaIcons.FaCube className="w-6 h-6 text-red-600" />,
+    icon: <FaIcons.FaCube />,
     description:
-      "Depending on the size and complexity of the design these wax patterns are assembled to a sprue or frame structure using a sticky wax. This assembly represents the metal flow channels during the casting operation and must be performed consistently.",
+      "Wax patterns are assembled on a sprue or frame structure using sticky wax, representing the metal flow channels during casting.",
   },
   {
     id: 4,
     title: "Shell Building",
-    icon: <FaIcons.FaHammer className="w-6 h-6 text-red-600" />,
+    icon: <FaIcons.FaHammer />,
     description:
-      "The wax assembly moves into a temperature-controlled room where it is dipped into a ceramic slurry mixture, then coated with refractory sand to create a shell. This is repeated until the shell thickness is adequate.",
+      "Assemblies are repeatedly dipped in ceramic slurry and coated with refractory sand to build strong shells for metal pouring.",
   },
   {
     id: 5,
     title: "Dewaxing & Wax Recycling",
-    icon: <FaIcons.FaRecycle className="w-6 h-6 text-red-600" />,
+    icon: <FaIcons.FaRecycle />,
     description:
-      "Once the shell coated wax assembly has dried, it is moved into a steam autoclave for dewaxing. The reclaimed wax is reused for non-critical assembly requirements.",
+      "The ceramic-coated wax assemblies are steam dewaxed; reclaimed wax is reused for non-critical patterns.",
   },
   {
     id: 6,
     title: "Preheating / Shell Baking",
-    icon: <FaIcons.FaThermometerHalf className="w-6 h-6 text-red-600" />,
+    icon: <FaIcons.FaThermometerHalf />,
     description:
-      "The shell molds are heated to a specific temperature prior to metal pour to avoid premature solidification.",
+      "Shells are baked at controlled temperatures before metal pouring to prevent premature solidification.",
   },
   {
     id: 7,
     title: "Metal Pouring",
-    icon: <FaIcons.FaTint className="w-6 h-6 text-red-600" />,
+    icon: <FaIcons.FaTint />,
     description:
-      "During this preheat cycle, the molten alloy is degassed and checked to ensure the chemistry is within specification allowances.",
+      "Molten metal is poured into the heated shell molds after alloy composition and degassing verification.",
   },
   {
     id: 8,
     title: "Shell Removal",
-    icon: <FaIcons.FaHammer className="w-6 h-6 text-red-600" />,
+    icon: <FaIcons.FaHammer />,
     description:
-      "The shell-coated castings are moved to a high-pressure pneumatic vibrator to remove the majority of the shell.",
+      "High-pressure vibration and pneumatic tools remove the outer ceramic shell, exposing the cast part.",
   },
   {
     id: 9,
-    title: "Fettling, Casting Finishing & Traceability",
-    icon: <FaIcons.FaCheckCircle className="w-6 h-6 text-red-600" />,
+    title: "Fettling & Finishing",
+    icon: <FaIcons.FaCheckCircle />,
     description:
-      "Castings undergo visual inspection, heat number traceability, and belt grinding operations to remove excess material such as gates and flash.",
+      "Castings undergo cutting, grinding, and surface finishing to remove gates, flash, and excess material.",
   },
   {
     id: 10,
     title: "Final Inspection & Documentation",
-    icon: <FaIcons.FaCheckCircle className="w-6 h-6 text-red-600" />,
+    icon: <FaIcons.FaClipboardCheck />,
     description:
-      "Final QC/QA inspection ensures that customer requirements have been met, completing all final certifications.",
+      "Rigorous QC ensures dimensional accuracy, traceability, and conformity with customer specifications.",
   },
   {
     id: 11,
     title: "Packaging & Labelling",
-    icon: <FaIcons.FaBoxOpen className="w-6 h-6 text-red-600" />,
+    icon: <FaIcons.FaBoxOpen />,
     description:
-      "Focus on packaging and labelling ensures the customer can easily unbox and identify the products legibly.",
+      "Products are carefully packed, labelled, and prepared for global dispatch with detailed documentation.",
   },
 ];
 
 export default function InfrastructurePage() {
   return (
-    <section className="bg-gray-100 py-16 px-4 md:px-16">
-      <h1 className="text-4xl font-bold text-gray-900 text-center mb-12">
-        Our Infrastructure & Quality Checks
-      </h1>
+    <section className="relative py-24 px-6 md:px-16 bg-gradient-to-b from-[#0f1112] via-[#1b1d1f] to-[#0f1112] text-white overflow-hidden">
+      {/* Metallic texture overlay */}
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-15 mix-blend-overlay pointer-events-none" />
 
-      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-        {infrastructureData.map((item) => (
-          <div
-            key={item.id}
-            className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow flex flex-col"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              {item.icon}
-              <h2 className="text-xl font-semibold text-gray-900">{item.title}</h2>
-            </div>
+      <div className="relative z-10 max-w-6xl mx-auto">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center text-3xl md:text-5xl font-extrabold mb-16 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400"
+        >
+          Our Infrastructure & Quality Process
+        </motion.h1>
 
-            <div className="flex flex-col flex-1">
-              {/* Description */}
-              <p className="text-gray-700 mb-4 flex-1">{item.description}</p>
+        <div className="relative">
+          {/* Vertical metallic line */}
+          <div className="absolute left-1/2 top-0 hidden md:block h-full w-[2px] bg-gradient-to-b from-sky-400/60 via-white/40 to-sky-400/60 transform -translate-x-1/2" />
 
-              {/* Image placeholder with fixed height */}
-              <div className="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-400">
-                Image Placeholder
-              </div>
-            </div>
+          <div className="space-y-20">
+            {infrastructureData.map((step, index) => (
+              <motion.div
+                key={step.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.05 }}
+                viewport={{ once: true }}
+                className={`relative flex flex-col md:flex-row items-center md:justify-between ${
+                  index % 2 === 0 ? "md:flex-row-reverse" : ""
+                }`}
+              >
+                {/* Connector dot */}
+                <div className="absolute hidden md:block left-1/2 transform -translate-x-1/2 bg-sky-400 w-5 h-5 rounded-full shadow-[0_0_15px_rgba(56,189,248,0.6)] border-2 border-white/40" />
+
+                {/* Card */}
+                <div
+                  className={`w-full md:w-[45%] p-6 rounded-3xl border border-white/15 bg-white/5 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.6)] transition-all duration-500 ${
+                    index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
+                  }`}
+                >
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full border border-sky-400/50 bg-white/10 shadow-inner">
+                      <span className="text-sky-300 text-2xl">{step.icon}</span>
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-semibold text-white tracking-wide">
+                        Step {index + 1}: {step.title}
+                      </h2>
+                    </div>
+                  </div>
+
+                  <p className="text-gray-300 leading-relaxed">{step.description}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );

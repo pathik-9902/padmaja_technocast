@@ -69,30 +69,38 @@ export default function WelcomeSection() {
   };
 
   return (
-    <section className="py-12 sm:py-16">
-      <div className="container mx-auto px-6">
+    <section className="relative py-16 min-h-screen overflow-hidden">
+      {/* ---------- Premium Dynamic Metallic Background ---------- */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#2b2b2b] to-[#1a1a1a]" />
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-25 mix-blend-overlay" />
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/noise.png')] opacity-10 animate-[pulse_8s_infinite]" />
+      <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-white/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none" />
+
+      {/* ---------- Content ---------- */}
+      <div className="relative z-10 container mx-auto px-6 text-center">
 
         {/* Hero Intro */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-12"
+          className="max-w-3xl mx-auto mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400 drop-shadow-lg mb-4">
             WELCOME TO PADMAJA TECHNOCAST LLP
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600">
+          <p className="text-gray-300 text-base sm:text-lg md:text-xl">
             We specialize in precision investment casting and machining solutions.
             With a team carrying 20+ years of expertise, we deliver excellence in
             ferrous and non-ferrous products for global industries.
           </p>
         </motion.div>
 
-        {/* 20+ Years of Expertise (Now Above Tabs) */}
+        {/* 20+ Years of Expertise */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-between bg-gradient-to-r from-red-50 to-red-100 p-8 rounded-2xl shadow-lg mb-10"
+          className="flex flex-col sm:flex-row items-center justify-between backdrop-blur-2xl bg-white/10 border border-white/20 rounded-3xl p-8 mb-10 shadow-[0_8px_30px_rgba(0,0,0,0.4)]"
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -100,18 +108,18 @@ export default function WelcomeSection() {
         >
           <div className="text-center sm:text-left mb-4 sm:mb-0">
             <motion.h2
-              className="text-5xl sm:text-6xl font-extrabold text-red-600 mb-2"
+              className="text-5xl sm:text-6xl font-extrabold text-sky-400 mb-2"
               initial={{ scale: 0.5, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, type: "spring", stiffness: 120 }}
             >
               20+
             </motion.h2>
-            <p className="text-gray-900 text-lg sm:text-xl font-semibold">
+            <p className="text-white text-lg sm:text-xl font-semibold">
               Years of Combined Expertise
             </p>
           </div>
-          <p className="text-gray-600 max-w-md sm:ml-6 text-center sm:text-left">
+          <p className="text-gray-300 max-w-md sm:ml-6 text-center sm:text-left">
             Our team brings over 20 years of combined experience in precision
             investment casting and machining, delivering unmatched quality,
             reliability, and innovation.
@@ -128,10 +136,10 @@ export default function WelcomeSection() {
                 <button
                   key={key}
                   onClick={() => setActiveTab(key)}
-                  className={`px-5 py-2 rounded-md font-medium transition text-sm ${
+                  className={`px-5 py-2 rounded-2xl font-medium transition text-sm ${
                     activeTab === key
-                      ? "bg-red-600 text-white shadow"
-                      : "bg-white text-gray-900 border border-gray-300 hover:bg-red-50"
+                      ? "bg-white/10 text-white shadow-[0_8px_30px_rgba(0,0,0,0.4)] border border-white/20"
+                      : "bg-white/5 text-gray-300 border border-white/10 hover:bg-white/10"
                   }`}
                 >
                   {tabs[key as keyof typeof tabs].title}
@@ -142,7 +150,7 @@ export default function WelcomeSection() {
             {/* Tab Content */}
             <motion.div
               key={activeTab}
-              className="text-gray-600 mb-6 text-sm sm:text-base"
+              className="text-gray-300 mb-6 text-sm sm:text-base"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -151,22 +159,25 @@ export default function WelcomeSection() {
             </motion.div>
 
             {/* Features Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {tabs[activeTab as keyof typeof tabs].features.map(
                 (feature, index) => (
                   <motion.div
                     key={index}
-                    className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition text-center"
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.15, duration: 0.5 }}
+                    whileHover={{ scale: 1.08, y: -8 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 12, duration: 0.2 }}
+                    className="relative group rounded-3xl p-6 backdrop-blur-2xl bg-white/10 border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] text-center"
                   >
-                    <feature.icon className="w-8 h-8 text-red-600 mx-auto mb-2" />
-                    <h3 className="text-md font-semibold text-gray-900 mb-1">
+                    {/* subtle glass shine */}
+                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                    <div className="flex justify-center mb-4">
+                      <feature.icon className="w-8 h-8 text-sky-300 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500" />
+                    </div>
+                    <h3 className="text-md font-semibold text-white mb-1">
                       {feature.title}
                     </h3>
-                    <p className="text-sm text-gray-600">{feature.desc}</p>
+                    <p className="text-gray-300 text-sm">{feature.desc}</p>
                   </motion.div>
                 )
               )}

@@ -6,18 +6,11 @@ import { useState } from "react";
 import emailjs from "emailjs-com";
 
 export default function ContactUs() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-  });
-
+  const [form, setForm] = useState({ name: "", email: "", phone: "", address: "" });
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,15 +18,10 @@ export default function ContactUs() {
 
     emailjs
       .send(
-        "YOUR_SERVICE_ID", // replace with EmailJS Service ID
-        "YOUR_TEMPLATE_ID", // replace with EmailJS Template ID
-        {
-          from_name: form.name,
-          from_email: form.email,
-          phone: form.phone,
-          address: form.address,
-        },
-        "YOUR_PUBLIC_KEY" // replace with EmailJS Public Key
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        { from_name: form.name, from_email: form.email, phone: form.phone, address: form.address },
+        "YOUR_PUBLIC_KEY"
       )
       .then(
         () => {
@@ -50,75 +38,59 @@ export default function ContactUs() {
   };
 
   return (
-    <section className="relative py-20">
-      <div className="container mx-auto px-6">
+    <section className="relative py-20 overflow-hidden">
+      {/* ---------- Premium Metallic Background ---------- */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#2b2b2b] to-[#1a1a1a]" />
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-25 mix-blend-overlay" />
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/noise.png')] opacity-10 animate-[pulse_8s_infinite]" />
+      <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-white/10 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none" />
+
+      <div className="relative z-10 container mx-auto px-6">
         {/* Heading */}
         <motion.div
           className="text-center mb-12"
-          initial={{ opacity: 0, y: -30 }}
+          initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-brand-black mb-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400 mb-4 drop-shadow-lg">
             Contact Us
           </h2>
-          <p className="text-gray-700 max-w-xl mx-auto">
+          <p className="text-gray-300 max-w-xl mx-auto">
             Get in touch with us — we’d love to hear from you!
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Contact Form */}
           <motion.form
             onSubmit={handleSubmit}
-            className="bg-brand-white p-8 rounded-2xl shadow-md border border-gray-300"
+            className="backdrop-blur-2xl bg-white/10 border border-white/20 rounded-3xl p-6 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] transition-all duration-500"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="space-y-5">
-              <input
-                type="text"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                placeholder="Your Name"
-                required
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-              />
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="Your Email"
-                required
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-              />
-              <input
-                type="tel"
-                name="phone"
-                value={form.phone}
-                onChange={handleChange}
-                placeholder="Your Phone Number"
-                required
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-              />
-              <input
-                type="text"
-                name="address"
-                value={form.address}
-                onChange={handleChange}
-                placeholder="Your Address"
-                required
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
-              />
+            <div className="space-y-4">
+              {["name", "email", "phone", "address"].map((field) => (
+                <input
+                  key={field}
+                  type={field === "email" ? "email" : "text"}
+                  name={field}
+                  value={form[field as keyof typeof form]}
+                  onChange={handleChange}
+                  placeholder={`Your ${field.charAt(0).toUpperCase() + field.slice(1)}`}
+                  required
+                  className="w-full rounded-xl px-4 py-2 bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400 backdrop-blur-lg"
+                />
+              ))}
+
               <motion.button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-red-600 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-red-500 transition"
+                className="w-full rounded-xl px-4 py-2 font-semibold text-white backdrop-blur-2xl bg-white/10 border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -127,9 +99,9 @@ export default function ContactUs() {
             </div>
           </motion.form>
 
-          {/* Google Map iframe (no JS API) */}
+          {/* Google Map */}
           <motion.div
-            className="rounded-2xl overflow-hidden shadow-md border border-gray-300"
+            className="rounded-3xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.4)] border border-white/20"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -149,24 +121,25 @@ export default function ContactUs() {
 
         {/* Contact Info */}
         <motion.div
-          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
+          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <div className="p-6 bg-brand-white rounded-xl shadow-md border border-gray-300">
-            <Mail className="mx-auto w-6 h-6 text-red-600 mb-2" />
-            <p className="text-gray-700">info@padmajatechnocast.com</p>
-          </div>
-          <div className="p-6 bg-brand-white rounded-xl shadow-md border border-gray-300">
-            <Phone className="mx-auto w-6 h-6 text-red-600 mb-2" />
-            <p className="text-gray-700">+91 12345 67890</p>
-          </div>
-          <div className="p-6 bg-brand-white rounded-xl shadow-md border border-gray-300">
-            <MapPin className="mx-auto w-6 h-6 text-red-600 mb-2" />
-            <p className="text-gray-700">Rajkot, Gujarat, India</p>
-          </div>
+          {[
+            { icon: Mail, text: "info@padmajatechnocast.com" },
+            { icon: Phone, text: "+91 12345 67890" },
+            { icon: MapPin, text: "Rajkot, Gujarat, India" },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className="backdrop-blur-2xl bg-white/10 border border-white/20 rounded-3xl p-6 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] transition-all duration-500"
+            >
+              <item.icon className="mx-auto w-6 h-6 text-sky-300 mb-2" />
+              <p className="text-white">{item.text}</p>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>

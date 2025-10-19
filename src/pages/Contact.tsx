@@ -1,4 +1,7 @@
+"use client";
+
 import { Mail, Phone, Send } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   const leaders = [
@@ -29,130 +32,146 @@ export default function Contact() {
   ];
 
   return (
-    <div className="text-gray-900">
-      {/* Header */}
-      <section className="py-16 px-6 text-center bg-white shadow-sm">
-        <h1 className="text-5xl font-bold mb-4 text-gray-900">Contact Us</h1>
-        <p className="max-w-2xl mx-auto text-lg text-gray-600">
-          Reach out to Padmaja Technocast LLP. Connect with our leadership team
-          or send us a direct message below.
-        </p>
+    <div className="relative min-h-screen overflow-hidden text-gray-100">
+      {/* ---------- Background ---------- */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#2b2b2b] to-[#1a1a1a]" />
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-25 mix-blend-overlay" />
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/noise.png')] opacity-10 animate-[pulse_8s_infinite]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none" />
+
+      {/* ---------- Header ---------- */}
+      <section className="relative z-10 text-center py-20">
+        <motion.h1
+          className="text-5xl md:text-6xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400 drop-shadow-lg mb-6"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >
+          Contact Us
+        </motion.h1>
+        <motion.p
+          className="text-lg md:text-xl max-w-3xl mx-auto text-gray-300"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.7 }}
+        >
+          Reach out to Padmaja Technocast LLP. Connect with our leadership team or send us a direct message below.
+        </motion.p>
       </section>
 
-      {/* Leadership */}
-      <section className="py-12 px-6 bg-gray-100">
-        <h2 className="text-3xl font-bold text-center mb-10 text-gray-900">
+      {/* ---------- Leadership ---------- */}
+      <section className="relative z-10 py-16 px-6">
+        <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
           Our Leadership
         </h2>
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {leaders.map((person) => (
-            <div
+            <motion.div
               key={person.name}
-              className="bg-white border border-gray-200 rounded-2xl shadow-lg hover:shadow-xl p-6 text-center transition duration-300"
+              whileHover={{ scale: 1.06, y: -6 }}
+              transition={{ duration: 0.3 }}
+              className="rounded-3xl p-6 text-center backdrop-blur-2xl bg-white/10 border border-white/20 
+                shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] 
+                transition-all duration-500"
             >
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                {person.role}
-              </h3>
-              <p className="text-lg font-medium text-gray-800 mb-3">{person.name}</p>
-              <p className="flex items-center justify-center gap-2 text-gray-600 mb-2 text-sm">
-                <Mail size={16} className="text-red-600" /> {person.email}
+              <h3 className="text-lg font-semibold text-white mb-2">{person.role}</h3>
+              <p className="text-xl font-medium text-gray-200 mb-3">{person.name}</p>
+              <p className="flex items-center justify-center gap-2 text-gray-400 mb-2 text-sm">
+                <Mail size={16} className="text-sky-400" /> {person.email}
               </p>
-              <p className="flex items-center justify-center gap-2 text-gray-600 text-sm">
-                <Phone size={16} className="text-red-600" /> {person.phone}
+              <p className="flex items-center justify-center gap-2 text-gray-400 text-sm">
+                <Phone size={16} className="text-sky-400" /> {person.phone}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Contact Form */}
-      <section className="py-12 px-6 bg-white">
-        <div className="container mx-auto max-w-3xl shadow-lg rounded-2xl p-8 border border-gray-200">
-          <h2 className="text-3xl font-bold mb-6 text-center text-gray-900">
+      {/* ---------- Contact Form ---------- */}
+      <section className="relative z-10 py-16 px-6">
+        <div className="max-w-3xl mx-auto backdrop-blur-2xl bg-white/10 border border-white/20 
+          shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] 
+          rounded-3xl p-10 transition-all duration-500">
+          <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
             Send Us a Message
           </h2>
+
           <form className="space-y-6">
-            {/* Name + Email */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
                 type="text"
                 placeholder="Full Name"
                 required
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:ring-2 focus:ring-red-600"
+                className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
               />
               <input
                 type="email"
                 placeholder="Email Address"
                 required
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:ring-2 focus:ring-red-600"
+                className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
               />
             </div>
 
-            {/* Phone + Subject */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
                 type="tel"
                 placeholder="Phone Number"
                 required
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:ring-2 focus:ring-red-600"
+                className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
               />
               <input
                 type="text"
                 placeholder="Subject"
                 required
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:ring-2 focus:ring-red-600"
+                className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
               />
             </div>
 
-            {/* Message */}
             <textarea
               placeholder="Your Message"
               rows={5}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:ring-2 focus:ring-red-600"
+              className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
             ></textarea>
 
-            {/* File upload */}
             <div>
-              <label className="block mb-2 text-gray-600 text-sm">
-                Attach File (optional)
-              </label>
+              <label className="block mb-2 text-gray-300 text-sm">Attach File (optional)</label>
               <input
                 type="file"
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-900"
+                className="w-full rounded-lg px-4 py-2 bg-white/10 border border-white/20 text-white"
               />
             </div>
 
-            {/* Submit */}
-            <button
+            <motion.button
               type="submit"
-              className="w-full bg-red-600 text-white py-3 rounded-xl flex items-center justify-center gap-2 hover:bg-red-500 transition"
+              whileHover={{ scale: 1.05 }}
+              className="w-full py-3 rounded-xl flex items-center justify-center gap-2 font-semibold text-white
+                bg-gradient-to-r from-sky-400/30 via-white/10 to-sky-400/30 border border-white/20 
+                shadow-lg hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] transition-all duration-300"
             >
-              <Send size={18} /> Submit
-            </button>
+              <Send size={18} className="text-sky-300" /> Submit
+            </motion.button>
           </form>
         </div>
       </section>
 
-      {/* Map */}
-      <section className="py-12 px-6 bg-gray-100">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6 text-gray-900">Our Location</h2>
-          <p className="text-gray-600 mb-8">
-            Visit our corporate office for inquiries and discussions.
-          </p>
-          <div className="w-full h-96 rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-            <iframe
-              title="Padmaja Technocast LLP Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.596986536408!2d72.585!3d23.034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sPadmaja%20Technocast!5e0!3m2!1sen!2sin!4v1663000000000!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
+      {/* ---------- Map ---------- */}
+      <section className="relative z-10 py-16 text-center">
+        <h2 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
+          Our Location
+        </h2>
+        <p className="text-gray-300 mb-8">Visit our corporate office for inquiries and discussions.</p>
+        <div className="max-w-6xl mx-auto h-96 rounded-3xl overflow-hidden border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+          <iframe
+            title="Padmaja Technocast LLP Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.596986536408!2d72.585!3d23.034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sPadmaja%20Technocast!5e0!3m2!1sen!2sin!4v1663000000000!5m2!1sen!2sin"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
       </section>
     </div>
