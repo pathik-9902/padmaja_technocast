@@ -129,7 +129,7 @@ export default function ContactUs() {
         >
           {[
             { icon: Mail, text: "info@padmajatechnocast.com" },
-            { icon: Phone, text: "+91 12345 67890" },
+            { icon: Phone, text: "+91 94286 61295" },
             { icon: MapPin, text: "Rajkot, Gujarat, India" },
           ].map((item, idx) => (
             <div

@@ -3,9 +3,7 @@
 import Hero from "./Hero";
 import WelcomeSection from "./WelcomeSection";
 import ServicesSection from "./ServicesSection";
-import ProjectsSection from "./ProjectsSection";
 import IndustriesSection from "./IndustriesSection";
-import StatsSection from "./StatsSection";
 import WhyChooseUs from "./WhyChooseUs";
 import CoreFeatures from "./CoreFeatures";
 import ContactUs from "./ContactUs";
@@ -29,19 +27,9 @@ export default function Home() {
         <ServicesSection />
       </section>
 
-      {/* Projects / Portfolio Section */}
-      <section>
-        <ProjectsSection />
-      </section>
-
       {/* Industries Section */}
       <section>
         <IndustriesSection />
-      </section>
-
-      {/* Stats / Numbers Section */}
-      <section>
-        <StatsSection />
       </section>
 
       {/* Why Choose Us Section */}

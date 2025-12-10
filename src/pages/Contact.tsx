@@ -8,25 +8,25 @@ export default function Contact() {
     {
       role: "Chief Financial Officer",
       name: "Hitesh Ranpariya",
-      email: "hitesh@gmail.com",
+      email: "info@padmajatechnocast.com",
       phone: "+91 96625 12697",
     },
     {
       role: "Chief Marketing Officer",
       name: "Krish Kotadiya",
-      email: "krish@gmail.com",
+      email: "sales@padmajatechnocast.com",
       phone: "+91 99981 40607",
     },
     {
       role: "Chief Operating Officer",
       name: "Jashmin Chovatiya",
-      email: "jashmin@gmail.com",
+      email: "info@padmajatechnocast.com",
       phone: "+91 88662 75204",
     },
     {
       role: "Manager - Marketing",
       name: "Rajesh Shendge",
-      email: "rajesh@gmail.com",
+      email: "marketing@padmajatechnocast.com",
       phone: "+91 93736 96951",
     },
   ];
@@ -96,15 +96,29 @@ export default function Contact() {
             Send Us a Message
           </h2>
 
-          <form className="space-y-6">
+          {/* ---------- FORM USING FORMSUBMIT.CO ---------- */}
+          <form
+            action="https://formsubmit.co/mytechid.999@gmail.com"
+            method="POST"
+            encType="multipart/form-data"
+            className="space-y-6"
+          >
+            {/* Hidden Config */}
+            <input type="hidden" name="_subject" value="New Inquiry from Padmaja Website" />
+            <input type="hidden" name="_captcha" value="false" />
+            {/* Optional Redirect */}
+            {/* <input type="hidden" name="_next" value="https://yourdomain.com/thank-you" /> */}
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
+                name="name"
                 type="text"
                 placeholder="Full Name"
                 required
                 className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
               />
               <input
+                name="email"
                 type="email"
                 placeholder="Email Address"
                 required
@@ -114,12 +128,14 @@ export default function Contact() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
+                name="phone"
                 type="tel"
                 placeholder="Phone Number"
                 required
                 className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
               />
               <input
+                name="subject"
                 type="text"
                 placeholder="Subject"
                 required
@@ -128,6 +144,7 @@ export default function Contact() {
             </div>
 
             <textarea
+              name="message"
               placeholder="Your Message"
               rows={5}
               required
@@ -137,6 +154,7 @@ export default function Contact() {
             <div>
               <label className="block mb-2 text-gray-300 text-sm">Attach File (optional)</label>
               <input
+                name="attachment"
                 type="file"
                 className="w-full rounded-lg px-4 py-2 bg-white/10 border border-white/20 text-white"
               />
@@ -164,7 +182,7 @@ export default function Contact() {
         <div className="max-w-6xl mx-auto h-96 rounded-3xl overflow-hidden border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
           <iframe
             title="Padmaja Technocast LLP Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3680.596986536408!2d72.585!3d23.034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sPadmaja%20Technocast!5e0!3m2!1sen!2sin!4v1663000000000!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3698.3221119691707!2d70.77947429999999!3d22.037270499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39583799509268af%3A0x4b3871838d78355c!2sPadmaja%20Technocast!5e0!3m2!1sen!2sin!4v1757633076102!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}

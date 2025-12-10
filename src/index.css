@@ -1,1 +1,58 @@
 @import "tailwindcss";
+
+
+/* -----------------------------------------------------------
+   GLOBAL LAYOUT WIDTH ENHANCEMENT
+   Expands container width and horizontal breathing room
+------------------------------------------------------------*/
+
+/* Tailwind's .container defaults to ~1200px max width.
+   We override it to allow broader placement across the screen.
+*/
+
+.container {
+  max-width: 1400px !important;   /* Increase main width */
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1600px !important; /* Extra wide on 2K screens */
+  }
+}
+
+@media (min-width: 1800px) {
+  .container {
+    max-width: 1750px !important; /* Very large displays */
+  }
+}
+
+/* Optional: Smoothen global typography scale so text looks elegant on larger layouts */
+html {
+  font-size: 17px;
+}
+
+@media (min-width: 1280px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1600px) {
+  html {
+    font-size: 19px;
+  }
+}
+
+/* Slightly widen sections for a broader design feel */
+section {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Prevent unwanted shrinking on very wide screens */
+body {
+  overflow-x: hidden;
+}

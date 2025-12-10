@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { ShieldCheck, Award, Users, Wrench } from "lucide-react";
 
 const reasons = [
-  { id: 1, icon: <Wrench className="w-6 h-6 text-sky-300" />, text: "State-of-the-Art Manufacturing Tools" },
-  { id: 2, icon: <Award className="w-6 h-6 text-sky-300" />, text: "ISO 9001:2015 Certified Company" },
-  { id: 3, icon: <ShieldCheck className="w-6 h-6 text-sky-300" />, text: "Metallurgically & Dimensionally Precise Castings" },
-  { id: 4, icon: <Users className="w-6 h-6 text-sky-300" />, text: "Experienced Engineers & Skilled Team" },
+  { id: 1, icon: <Wrench className="w-6 h-6 text-sky-300" />, text: "State-of-the-art in-house manufacturing" },
+  { id: 2, icon: <Award className="w-6 h-6 text-sky-300" />, text: "ISO 9001:2015 certified quality systems" },
+  { id: 3, icon: <ShieldCheck className="w-6 h-6 text-sky-300" />, text: "Metallurgically & dimensionally precise castings" },
+  { id: 4, icon: <Users className="w-6 h-6 text-sky-300" />, text: "Experienced engineers and skilled workforce" },
 ];
 
 export default function WhyChooseUs() {
@@ -31,6 +31,7 @@ export default function WhyChooseUs() {
           <h2 className="text-4xl md:text-5xl font-extrabold tracking-wide text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400 drop-shadow-lg">
             Why Choose Padmaja Technocast
           </h2>
+
           <h3 className="text-2xl md:text-3xl font-semibold text-white/80 mb-6">
             Excellence in Precision Casting
           </h3>
@@ -39,13 +40,13 @@ export default function WhyChooseUs() {
             {reasons.map((reason, index) => (
               <motion.li
                 key={reason.id}
-                className="flex items-center gap-4 backdrop-blur-2xl bg-white/10 border border-white/20 rounded-xl p-5 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] transition-all duration-500"
+                className="flex items-center gap-4 backdrop-blur-2xl bg-white/8 border border-white/10 rounded-xl p-5 shadow-[0_8px_30px_rgba(0,0,0,0.45)] hover:shadow-[0_18px_60px_rgba(0,0,0,0.6)] transition-all duration-400"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
+                transition={{ delay: index * 0.14, duration: 0.6 }}
                 viewport={{ once: true }}
               >
-                <span className="bg-white/10 p-3 rounded-full flex items-center justify-center shadow-md">
+                <span className="bg-white/6 p-3 rounded-full flex items-center justify-center shadow-md">
                   {reason.icon}
                 </span>
                 <span className="text-white font-medium">{reason.text}</span>
@@ -60,13 +61,11 @@ export default function WhyChooseUs() {
             transition={{ duration: 0.8, delay: 0.8 }}
             viewport={{ once: true }}
           >
-            At Padmaja Technocast, we specialize in modern Precision Investment Castings using the Lost Wax Process. 
-            Our ISO-certified plant near Rajkot, Gujarat, produces castings ranging from a few grams up to 80kgs with a monthly capacity of 80MT. 
-            With advanced technology and a skilled team, we ensure high-quality, reliable, and precise castings for industries worldwide.
+            Padmaja Technocast specializes in precision investment castings using the lost-wax process. Our ISO-certified facility near Rajkot produces castings from a few grams up to 80 kg, with an 80 MT monthly capacity. We combine advanced equipment, metallurgical expertise and strict inspection protocols to deliver components that meet demanding dimensional, mechanical and surface-finish requirements.
           </motion.p>
         </motion.div>
 
-        {/* Right Content - Images */}
+        {/* Right Content - Visuals */}
         <motion.div
           className="grid grid-cols-2 gap-4"
           initial={{ opacity: 0, x: 50 }}
@@ -77,13 +76,50 @@ export default function WhyChooseUs() {
           <motion.img
             src={`${import.meta.env.BASE_URL}images/whychooseus/img1.jpg`}
             alt="Precision Casting Process"
-            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.4)] object-cover h-56 w-full hover:scale-105 transition-transform duration-300"
+            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.45)] object-cover h-56 w-full hover:scale-105 transition-transform duration-300"
           />
           <motion.img
-            src={`${import.meta.env.BASE_URL}images/whychooseus/img1.jpg`}
+            src={`${import.meta.env.BASE_URL}images/whychooseus/img2.jpg`}
             alt="Advanced Manufacturing Plant"
-            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.4)] object-cover h-56 w-full hover:scale-105 transition-transform duration-300"
+            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.45)] object-cover h-56 w-full hover:scale-105 transition-transform duration-300"
           />
+        </motion.div>
+      </div>
+
+      {/* Additional Details Panel */}
+      <div className="relative z-10 container mx-auto px-6 mt-12">
+        <motion.div
+          className="backdrop-blur-2xl bg-white/6 border border-white/10 rounded-3xl p-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+        >
+          <div className="grid md:grid-cols-2 gap-8 text-gray-300">
+            <div>
+              <h4 className="text-xl font-semibold text-white mb-3">Manufacturing & Technical Capabilities</h4>
+              <p className="mb-3">
+                We manufacture a broad range of valve components — from intricate precision geometries to robust, heavy-duty parts. Our capabilities include metallurgical testing, dimensional inspection, precision machining, coating and surface-finishing operations to ensure parts are production-ready.
+              </p>
+
+              <h4 className="text-lg font-semibold text-white mt-4 mb-2">Testing & Quality</h4>
+              <p>
+                Every component undergoes rigorous testing: hardness & impact testing, chemical analysis and dimensional verification. Only defect-free parts leave our facility, backed by traceability and documented inspection records.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="text-xl font-semibold text-white mb-3">Materials & Value-Added Services</h4>
+              <p className="mb-3">
+                We work with common steels and specialized alloys sourced to global standards. Clients can specify materials or rely on our metallurgical recommendations for optimal performance. Additional services include final machining, assembly, surface treatments and custom packaging.
+              </p>
+
+              <h4 className="text-lg font-semibold text-white mt-4 mb-2">Partnership Advantage</h4>
+              <p>
+                Partnering with Padmaja Technocast delivers competitive pricing, responsive engineering support, and end-to-end production including finishing and post-processing. Our approach is collaborative — we align manufacturing plans to customer schedules and quality requirements.
+              </p>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
