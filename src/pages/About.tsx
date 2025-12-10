@@ -8,25 +8,25 @@ export default function About() {
     {
       name: "Mr. Hitesh Ranpariya",
       role: "CFO",
-      image: `src/assets/team/person1.jpeg`,
+      image: `/assets/team/person1.jpeg`,
       linkedin: "https://www.linkedin.com/in/hitesh-ranpariya-597427230/",
     },
     {
       name: "Mr. Krish Kotadiya",
       role: "CMO",
-      image: `src/assets/team/person1.jpeg`,
+      image: `/assets/team/person1.jpeg`,
       linkedin: "https://www.linkedin.com/in/krish-kotadiya-7ab139283/",
     },
     {
       name: "Mr. Jashmin Chovatiya",
       role: "COO",
-      image: `src/assets/team/person1.jpeg`,
+      image: `/assets/team/person1.jpeg`,
       linkedin: "https://www.linkedin.com/in/jashmin-chovatiya-872460380/",
     },
     {
       name: "Mr. Rajesh Shendge",
       role: "Manager – Marketing",
-      image: `src/assets/team/person1.jpeg`,
+      image: `/assets/team/person1.jpeg`,
       linkedin: "https://www.linkedin.com/in/rajesh-shendge-a85b91303/",
     },
   ];
@@ -112,7 +112,7 @@ export default function About() {
             >
               <div className="rounded-2xl overflow-hidden border border-white/15 bg-black/40 shadow-[0_16px_45px_rgba(0,0,0,0.8)]">
                 <img
-                  src={`src/assets/team/about.jpg`}
+                  src={`/assets/team/about.jpg`}
                   alt="Padmaja Technocast Plant"
                   className="w-full h-full object-cover"
                 />

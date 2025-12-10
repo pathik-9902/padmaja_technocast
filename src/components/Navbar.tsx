@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "/src/assets/download.jpg"; // use SVG for crisp spin
+import logo from "/assets/logo.svg"; // use SVG for crisp spin
 
 /* -------------------------
    FlipLogo component

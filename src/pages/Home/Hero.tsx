@@ -20,21 +20,21 @@ type Slide = {
 const slides: Slide[] = [
   {
     id: 1,
-    image: `src/assets/carousel/img1.png`,
+    image: `/assets/carousel/img1.png`,
     alt: "Precision casting close-up",
     heading: "Excellence in Precision Investment Castings",
     text: "Delivering high-quality, durable, and technologically advanced castings to industries worldwide.",
   },
   {
     id: 2,
-    image: `src/assets/carousel/img2.png`,
+    image: `/assets/carousel/img2.png`,
     alt: "Engineering and tooling",
     heading: "Engineering Innovation & Expertise",
     text: "Combining modern technology with skilled craftsmanship to create complex, reliable components.",
   },
   {
     id: 3,
-    image: `src/assets/carousel/img3.png`,
+    image: `/assets/carousel/img3.png`,
     alt: "Quality inspection",
     heading: "Global Quality Standards",
     text: "ISO 9001:2015 certified manufacturing ensuring consistency, precision, and timely delivery.",
@@ -42,7 +42,7 @@ const slides: Slide[] = [
   // optional 4th slide
   {
     id: 4,
-    image: `src/assets/carousel/img4.png`,
+    image: `/assets/carousel/img4.png`,
     alt: "Finished components",
     heading: "Delivering on Time, Every Time",
     text: "Robust supply chain and on-time delivery for critical manufacturing partners.",
@@ -137,7 +137,7 @@ export default function Hero(): JSX.Element {
       <div className="relative z-20">
         <Slider ref={sliderRef} {...settings}>
           {slides.map((slide) => (
-            <div key={slide.id} className="relative w-full h-[70vh] md:h-[85vh]">
+            <div key={slide.id} className="relative w-full h-[70vh] md:h-[95vh]">
               <img
                 src={slide.image}
                 alt={slide.alt ?? slide.heading}

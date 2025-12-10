@@ -177,7 +177,7 @@ export default function ServicesSection() {
             {/* Main foundry photo */}
             <div className="rounded-3xl overflow-hidden border border-white/15 bg-black/40 shadow-[0_22px_70px_rgba(0,0,0,0.9)] h-[260px] sm:h-[320px] lg:h-[360px]">
               <img
-                src={`${import.meta.env.BASE_URL}images/services/foundry-main.jpg`}
+                src={`/assets/services/prod1.jpg`}
                 alt="Investment casting foundry"
                 className="w-full h-full object-cover"
               />
@@ -187,14 +187,14 @@ export default function ServicesSection() {
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-2xl overflow-hidden border border-white/12 bg-black/40 shadow-[0_16px_50px_rgba(0,0,0,0.85)] h-40 sm:h-44 lg:h-48">
                 <img
-                  src={`${import.meta.env.BASE_URL}images/services/casting-detail.jpg`}
+                  src={`/assets/services/prod1.jpg`}
                   alt="Casting detail"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="rounded-2xl overflow-hidden border border-white/12 bg-black/40 shadow-[0_16px_50px_rgba(0,0,0,0.85)] h-40 sm:h-44 lg:h-48">
                 <img
-                  src={`${import.meta.env.BASE_URL}images/services/inspection.jpg`}
+                  src={`/assets/services/prod1.jpg`}
                   alt="Inspection and quality check"
                   className="w-full h-full object-cover"
                 />

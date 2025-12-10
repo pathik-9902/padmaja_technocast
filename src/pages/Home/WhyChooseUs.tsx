@@ -67,21 +67,21 @@ export default function WhyChooseUs() {
 
         {/* Right Content - Visuals */}
         <motion.div
-          className="grid grid-cols-2 gap-4"
+          className="grid grid-cols-2 pt-30 gap-4"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true, amount: 0.3 }}
         >
           <motion.img
-            src={`src/assets//whychooseus/img1.png`}
+            src={`/assets//whychooseus/img1.png`}
             alt="Precision Casting Process"
-            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.45)] object-cover h-70 w-full hover:scale-105 transition-transform duration-300"
+            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.45)] object-cover h-80 w-full hover:scale-105 transition-transform duration-300"
           />
           <motion.img
-            src={`src/assets//whychooseus/img2.png`}
+            src={`/assets//whychooseus/img2.png`}
             alt="Advanced Manufacturing Plant"
-            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.45)] object-cover h-70 w-full hover:scale-105 transition-transform duration-300"
+            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.45)] object-cover h-80 w-full hover:scale-105 transition-transform duration-300"
           />
         </motion.div>
       </div>
