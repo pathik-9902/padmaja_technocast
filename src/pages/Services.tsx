@@ -232,7 +232,7 @@ export default function ServicesSection() {
           >
             {/* Video player container */}
             <div className="rounded-3xl overflow-hidden border border-white/15 bg-black/40 shadow-[0_22px_70px_rgba(0,0,0,0.9)]">
-              <div className="w-full h-[360px] sm:h-[420px] lg:h-[480px] relative bg-black">
+              <div className="w-full h-[360px] sm:h-[420px] lg:h-[410px] relative bg-black">
                 <video
                   ref={videoRef}
                   className="w-full h-full object-cover"
