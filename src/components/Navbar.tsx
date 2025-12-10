@@ -1,8 +1,93 @@
-import { useState } from "react";
+// src/components/Navbar.tsx
+import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
-import logo from "/src/assets/download.svg"; // lotus without background
+import logo from "/src/assets/download.jpg"; // use SVG for crisp spin
 
+/* -------------------------
+   FlipLogo component
+   (continuous vertical-axis spin)
+   ------------------------- */
+type FlipLogoProps = {
+  frontSrc: string;
+  backSrc?: string;
+  size?: number | string;
+  duration?: number;
+  perspective?: number;
+  className?: string;
+};
+
+function FlipLogo({
+  frontSrc,
+  backSrc,
+  size = 70,           // bigger now: logo looks larger
+  duration = 6,
+  perspective = 900,
+  className = "",
+}: FlipLogoProps) {
+  const back = backSrc ?? frontSrc;
+  const wrapperStyle: React.CSSProperties = {
+    perspective: `${perspective}px`,
+    width: typeof size === "number" ? `${size}px` : size,
+    height: typeof size === "number" ? `${size}px` : size,
+    display: "inline-block",
+  };
+
+  const animName = `spinY_${duration * 1000}`;
+
+  return (
+    <>
+      <style>{`
+        .ft-preserve-3d { transform-style: preserve-3d; }
+        .ft-backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+
+        @keyframes ${animName} {
+          from { transform: rotateY(0deg); }
+          to { transform: rotateY(360deg); }
+        }
+
+        .ft-spin { 
+          animation-name: ${animName}; 
+          animation-duration: ${duration}s; 
+          animation-timing-function: linear; 
+          animation-iteration-count: infinite; 
+        }
+      `}</style>
+
+      <div style={wrapperStyle}>
+        <div className="relative w-full h-full ft-preserve-3d ft-spin">
+
+          <div className="absolute inset-0 ft-backface-hidden flex items-center justify-center">
+            <img
+              src={frontSrc}
+              alt="logo front"
+              className={`w-full h-full object-contain ${className}`}
+              draggable={false}
+            />
+          </div>
+
+          <div
+            className="absolute inset-0 ft-backface-hidden flex items-center justify-center"
+            style={{ transform: "rotateY(180deg)" }}
+          >
+            <img
+              src={back}
+              alt="logo back"
+              className={`w-full h-full object-contain ${className}`}
+              style={{ transform: "scaleX(-1)" }}
+              draggable={false}
+            />
+          </div>
+
+        </div>
+      </div>
+    </>
+  );
+}
+
+/* -------------------------
+   Navbar
+   ------------------------- */
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
@@ -17,42 +102,20 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Custom CSS injected inline */}
-      <style>
-        {`
-          .spin-slow:hover {
-            animation: spin 6s linear infinite;
-          }
-          @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
-        `}
-      </style>
-
       <header className="fixed top-0 left-0 w-full z-50 bg-[#111111] border-b border-white/10 shadow-lg">
         <div className="container mx-auto flex justify-between items-center py-4 px-6">
 
           {/* Logo + Brand */}
-          <Link to="/" className="flex items-center select-none">
+          <Link to="/" className="flex items-center select-none" onClick={() => setIsOpen(false)}>
 
-            {/* Circular Lotus */}
-            <div
-              className="
-                spin-slow
-                h-12 w-12 rounded-full 
-                border border-pink-400/70 
-                bg-transparent
-                flex items-center justify-center
-                shadow-lg
-              "
-            >
-              <img
-                src={logo}
-                alt="Padmaja Lotus Logo"
-                className="h-10 w-10 object-contain"
-              />
-            </div>
+            {/* LOGO WITHOUT CIRCLE – BIGGER SPINNING LOTUS */}
+            <FlipLogo
+              frontSrc={logo}
+              size={70}           // adjust to make logo big and prominent
+              duration={6}
+              perspective={900}
+              className="h-12 w-12"
+            />
 
             {/* Brand Text */}
             <div className="ml-3 leading-tight">
@@ -63,7 +126,6 @@ export default function Navbar() {
                 TECHNOCAST
               </span>
             </div>
-
           </Link>
 
           {/* Desktop Menu */}
