@@ -2,48 +2,49 @@
 
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { useState } from "react";
-import emailjs from "emailjs-com";
+import { useState, useRef } from "react";
 
 export default function ContactUs() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", address: "" });
   const [loading, setLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formRef.current) return;
+
     setLoading(true);
 
-    emailjs
-      .send(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
-        { from_name: form.name, from_email: form.email, phone: form.phone, address: form.address },
-        "YOUR_PUBLIC_KEY"
-      )
-      .then(
-        () => {
-          setLoading(false);
-          alert("✅ Your message has been sent!");
-          setForm({ name: "", email: "", phone: "", address: "" });
-        },
-        (error) => {
-          setLoading(false);
-          console.error("EmailJS Error:", error);
-          alert("❌ Failed to send. Please try again.");
-        }
-      );
+    try {
+      const fd = new FormData(formRef.current);
+
+      const response = await fetch("https://formsubmit.co/ajax/mytechid.999@gmail.com", {
+        method: "POST",
+        body: fd,
+      });
+
+      if (!response.ok) throw new Error(await response.text());
+      alert("✅ Your message has been sent!");
+
+      setForm({ name: "", email: "", phone: "", address: "" });
+      formRef.current.reset();
+    } catch (error) {
+      console.error("FormSubmit Error:", error);
+      alert("❌ Failed to send. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <section className="relative py-20 overflow-hidden">
-      {/* ---------- Premium Metallic Background ---------- */}
+      {/* ---------- Background Layers ---------- */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#2b2b2b] to-[#1a1a1a]" />
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-25 mix-blend-overlay" />
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/noise.png')] opacity-10 animate-[pulse_8s_infinite]" />
-      <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-white/10 via-transparent to-transparent pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none" />
 
       <div className="relative z-10 container mx-auto px-6">
@@ -64,8 +65,9 @@ export default function ContactUs() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Contact Form */}
+          {/* ---------- CONTACT FORM (Formsubmit.co) ---------- */}
           <motion.form
+            ref={formRef}
             onSubmit={handleSubmit}
             className="backdrop-blur-2xl bg-white/10 border border-white/20 rounded-3xl p-6 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] transition-all duration-500"
             initial={{ opacity: 0, x: -50 }}
@@ -73,24 +75,28 @@ export default function ContactUs() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
+            {/* Hidden config for FormSubmit */}
+            <input type="hidden" name="_subject" value="New Inquiry from Padmaja Website" />
+            <input type="hidden" name="_captcha" value="false" />
+
             <div className="space-y-4">
               {["name", "email", "phone", "address"].map((field) => (
                 <input
                   key={field}
-                  type={field === "email" ? "email" : "text"}
                   name={field}
+                  type="text"
                   value={form[field as keyof typeof form]}
                   onChange={handleChange}
                   placeholder={`Your ${field.charAt(0).toUpperCase() + field.slice(1)}`}
                   required
-                  className="w-full rounded-xl px-4 py-2 bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400 backdrop-blur-lg"
+                  className="w-full rounded-xl px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-400 backdrop-blur-lg"
                 />
               ))}
 
               <motion.button
                 type="submit"
                 disabled={loading}
-                className="w-full rounded-xl px-4 py-2 font-semibold text-white backdrop-blur-2xl bg-white/10 border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] transition-all duration-300"
+                className="w-full rounded-xl px-4 py-3 font-semibold text-white backdrop-blur-2xl bg-white/10 border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -99,7 +105,7 @@ export default function ContactUs() {
             </div>
           </motion.form>
 
-          {/* Google Map */}
+          {/* Map */}
           <motion.div
             className="rounded-3xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.4)] border border-white/20"
             initial={{ opacity: 0, x: 50 }}
@@ -119,7 +125,7 @@ export default function ContactUs() {
           </motion.div>
         </div>
 
-        {/* Contact Info */}
+        {/* Contact Info Section */}
         <motion.div
           className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center"
           initial={{ opacity: 0 }}

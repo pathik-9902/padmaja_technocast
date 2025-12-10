@@ -9,22 +9,17 @@ import Processes from "../pages/Processes";
 import Contact from "../pages/Contact";
 import Certificates from "../pages/Certificates";
 
-export const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <MainLayout />,
-      children: [
-        { path: "/", element: <Home /> },
-        { path: "about", element: <About /> },
-        { path: "services", element: <Services /> },
-        { path: "Processes", element: <Processes /> },
-        { path: "contact", element: <Contact /> },
-        { path: "certificates", element: <Certificates /> },
-      ],
-    },
-  ],
+export const router = createBrowserRouter([
   {
-    basename: "/padmaja_technocast",  // <<< IMPORTANT FIX
-  }
-);
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "about", element: <About /> },
+      { path: "services", element: <Services /> },
+      { path: "Processes", element: <Processes /> },
+      { path: "contact", element: <Contact /> },
+      { path: "certificates", element: <Certificates /> },
+    ],
+  },
+]);

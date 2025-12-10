@@ -196,7 +196,7 @@ const ProcessesData: ProcessesStep[] = [
         </p>
       </>
     ),
-    image: "src/assets/processes/process7.jpg",
+    image: "src/assets/processes/process6.jpg",
   },
   {
     id: 7,
@@ -226,7 +226,7 @@ const ProcessesData: ProcessesStep[] = [
         </p>
       </>
     ),
-    image: "src/assets/processes/process6.jpg",
+    image: "src/assets/processes/process7.jpg",
   },
   {
     id: 8,
@@ -256,7 +256,7 @@ const ProcessesData: ProcessesStep[] = [
         </p>
       </>
     ),
-    image: "src/assets/processes/process9.jpg",
+    image: "src/assets/processes/process8.jpg",
   },
   {
     id: 9,
@@ -285,7 +285,7 @@ const ProcessesData: ProcessesStep[] = [
         </p>
       </>
     ),
-    image: "src/assets/processes/process8.jpg",
+    image: "src/assets/processes/process9.jpg",
   },
   {
     id: 10,

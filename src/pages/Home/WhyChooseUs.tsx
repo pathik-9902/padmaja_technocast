@@ -74,14 +74,14 @@ export default function WhyChooseUs() {
           viewport={{ once: true, amount: 0.3 }}
         >
           <motion.img
-            src={`${import.meta.env.BASE_URL}images/whychooseus/img1.jpg`}
+            src={`src/assets//whychooseus/img1.png`}
             alt="Precision Casting Process"
-            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.45)] object-cover h-56 w-full hover:scale-105 transition-transform duration-300"
+            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.45)] object-cover h-70 w-full hover:scale-105 transition-transform duration-300"
           />
           <motion.img
-            src={`${import.meta.env.BASE_URL}images/whychooseus/img2.jpg`}
+            src={`src/assets//whychooseus/img2.png`}
             alt="Advanced Manufacturing Plant"
-            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.45)] object-cover h-56 w-full hover:scale-105 transition-transform duration-300"
+            className="rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.45)] object-cover h-70 w-full hover:scale-105 transition-transform duration-300"
           />
         </motion.div>
       </div>

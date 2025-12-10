@@ -6,19 +6,13 @@ import "slick-carousel/slick/slick-theme.css";
 
 import Slider from "react-slick";
 import { Download } from "lucide-react";
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type JSX,
-} from "react";
+import { useEffect, useMemo, useRef, useState, type JSX } from "react";
 import { Link } from "react-router-dom";
 
 type Slide = {
   id: number;
-  video?: string;
-  poster?: string;
+  image: string;
+  alt?: string;
   heading: string;
   text: string;
 };
@@ -26,29 +20,38 @@ type Slide = {
 const slides: Slide[] = [
   {
     id: 1,
-    video: `src/assets/carousel/vid1.mp4`,
+    image: `src/assets/carousel/img1.png`,
+    alt: "Precision casting close-up",
     heading: "Excellence in Precision Investment Castings",
     text: "Delivering high-quality, durable, and technologically advanced castings to industries worldwide.",
   },
   {
     id: 2,
-    video: `src/assets/carousel/vid2.mp4`,
+    image: `src/assets/carousel/img2.png`,
+    alt: "Engineering and tooling",
     heading: "Engineering Innovation & Expertise",
     text: "Combining modern technology with skilled craftsmanship to create complex, reliable components.",
   },
   {
     id: 3,
-    video: `src/assets/carousel/vid1.mp4`,
+    image: `src/assets/carousel/img3.png`,
+    alt: "Quality inspection",
     heading: "Global Quality Standards",
     text: "ISO 9001:2015 certified manufacturing ensuring consistency, precision, and timely delivery.",
+  },
+  // optional 4th slide
+  {
+    id: 4,
+    image: `src/assets/carousel/img4.png`,
+    alt: "Finished components",
+    heading: "Delivering on Time, Every Time",
+    text: "Robust supply chain and on-time delivery for critical manufacturing partners.",
   },
 ];
 
 export default function Hero(): JSX.Element {
   const [offsetY, setOffsetY] = useState(0);
   const [active, setActive] = useState(0);
-
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const sliderRef = useRef<Slider | null>(null);
 
   // Parallax Background Movement
@@ -72,39 +75,22 @@ export default function Hero(): JSX.Element {
     []
   );
 
-  // Slider settings (no autoplay, no arrows — videos control transitions)
+  // Slider settings: autoplay, infinite, no arrows, no pause on hover
   const settings = {
     dots: true,
     infinite: true,
-    autoplay: false,
+    autoplay: true,
+    autoplaySpeed: 3000,
     arrows: false,
     fade: true,
     speed: 900,
     slidesToShow: 1,
     slidesToScroll: 1,
+    pauseOnHover: false,
+    pauseOnFocus: false,
+    cssEase: "ease",
     afterChange: (i: number) => {
       setActive(i);
-
-      // Stop all videos, only play active video
-      videoRefs.current.forEach((v, idx) => {
-        if (!v) return;
-
-        if (idx === i) {
-          v.currentTime = 0;
-          v.muted = true;
-          v.playsInline = true;
-
-          const playPromise = v.play();
-          if (playPromise && playPromise.catch) {
-            playPromise.catch(() => {
-              // no-op
-            });
-          }
-        } else {
-          v.pause();
-          v.currentTime = 0;
-        }
-      });
     },
     appendDots: (dots: React.ReactNode) => (
       <div className="absolute bottom-6 w-full flex justify-center z-30 pointer-events-auto">
@@ -118,37 +104,8 @@ export default function Hero(): JSX.Element {
         }`}
       />
     ),
+    lazyLoad: "ondemand" as const,
   };
-
-  // When active video finishes → go to next slide
-  useEffect(() => {
-    const activeVideo = videoRefs.current[active];
-    if (!activeVideo) return;
-
-    const handleEnded = () => {
-      sliderRef.current?.slickNext();
-    };
-
-    activeVideo.addEventListener("ended", handleEnded);
-
-    return () => {
-      activeVideo.removeEventListener("ended", handleEnded);
-    };
-  }, [active]);
-
-  // Ensure first slide auto-plays at mount
-  useEffect(() => {
-    const t = setTimeout(() => {
-      const v = videoRefs.current[active];
-      if (v) {
-        v.muted = true;
-        v.playsInline = true;
-        const p = v.play();
-        if (p && p.catch) p.catch(() => {});
-      }
-    }, 300);
-    return () => clearTimeout(t);
-  }, [active]);
 
   return (
     <section className="relative w-full overflow-hidden">
@@ -179,22 +136,17 @@ export default function Hero(): JSX.Element {
 
       <div className="relative z-20">
         <Slider ref={sliderRef} {...settings}>
-          {slides.map((slide, slideIndex) => (
+          {slides.map((slide) => (
             <div key={slide.id} className="relative w-full h-[70vh] md:h-[85vh]">
-              <video
-                ref={(el) => {
-                  videoRefs.current[slideIndex] = el;
-                }}
-                src={slide.video}
-                poster={slide.poster}
-                muted
-                playsInline
-                preload="metadata"
+              <img
+                src={slide.image}
+                alt={slide.alt ?? slide.heading}
                 className="absolute inset-0 w-full h-full object-cover will-change-transform"
                 style={{
                   transform: `translate3d(0, ${offsetY * 0.18}px, 0)`,
                   transition: "transform 0.35s ease-out",
                 }}
+                loading="lazy"
               />
 
               <div className="absolute inset-0 bg-black/40" />
@@ -212,7 +164,7 @@ export default function Hero(): JSX.Element {
 
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                     <a
-                      href="/brochure.pdf"
+                      href="https://drive.google.com/file/d/1QAYFwIyTIqDj_3CvtINoLY8nrnRsAT7U/view?usp=drive_link"
                       download
                       className="inline-flex items-center gap-2 px-5 py-3 rounded-md text-sm sm:text-base font-semibold bg-white/10 border border-white/20 text-white shadow hover:bg-white/20 transition"
                     >
