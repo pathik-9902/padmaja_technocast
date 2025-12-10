@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Cpu, Settings, Truck, Layers } from "lucide-react";
 
@@ -82,6 +83,62 @@ const capabilities = {
 };
 
 export default function ServicesSection() {
+  // --- Video playlist: two videos to play sequentially in loop ---
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const videoSources = [
+    "/assets/services/vid1.mp4",
+    "/assets/services/vid2.mp4",
+  ];
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [videoIndex, setVideoIndex] = useState<number>(0);
+
+  // On videoIndex change, load the new src and play (muted to allow autoplay)
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+
+    // If the src is different, update it and try to play
+    if (vid.src && !vid.src.endsWith(videoSources[videoIndex])) {
+      vid.pause();
+      vid.load();
+    }
+
+    // Set src explicitly (helps in some environments)
+    vid.src = videoSources[videoIndex];
+    vid.muted = true;
+    vid.playsInline = true;
+    // attempt to play; browsers may require user gesture unless muted
+    const playPromise = vid.play();
+    if (playPromise && typeof playPromise.then === "function") {
+      playPromise.catch(() => {
+        // ignore autoplay suppression errors (video remains ready)
+      });
+    }
+
+    // handler for when current video ends -> advance to next
+    const handleEnded = () => {
+      setVideoIndex((i) => (i + 1) % videoSources.length);
+    };
+
+    vid.addEventListener("ended", handleEnded);
+    return () => {
+      vid.removeEventListener("ended", handleEnded);
+    };
+  }, [videoIndex, videoSources]);
+
+  // Ensure the player starts with videoIndex 0 when component mounts
+  useEffect(() => {
+    setVideoIndex(0);
+  }, []);
+
+  // --- Images: 20 product images ---
+  const productImageCount = 20;
+  const productImages = Array.from({ length: productImageCount }, (_, i) => ({
+    id: `product-${i + 1}`,
+    src: `/assets/services/prod${i + 1}.jpg`,
+    alt: `Product ${i + 1}`,
+  }));
+
   return (
     <section className="relative py-20 overflow-hidden">
       {/* Background theme – same metallic / dark style */}
@@ -93,7 +150,6 @@ export default function ServicesSection() {
       <div className="pointer-events-none absolute -left-40 top-24 h-80 w-80 rounded-full bg-sky-500/18 blur-3xl" />
       <div className="pointer-events-none absolute -right-40 bottom-0 h-80 w-80 rounded-full bg-sky-400/16 blur-3xl" />
 
-      {/* Use full horizontal space with comfortable padding */}
       <div className="relative z-10 w-full mx-auto px-4 sm:px-8 lg:px-16">
         {/* Header */}
         <div className="text-center mb-14">
@@ -131,7 +187,7 @@ export default function ServicesSection() {
           </motion.p>
         </div>
 
-        {/* Highlight row – spread across full width */}
+        {/* Highlight row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {creativeHighlights.map((h, idx) => (
             <motion.div
@@ -164,9 +220,9 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        {/* Main area – photos + sectors, using more width */}
+        {/* Main area – video player + products */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 items-start mb-16">
-          {/* Photos column (wider, full-height feel) */}
+          {/* Video column (replaces the foundry photo area) */}
           <motion.div
             className="space-y-5"
             initial={{ opacity: 0, x: -15 }}
@@ -174,40 +230,30 @@ export default function ServicesSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            {/* Main foundry photo */}
-            <div className="rounded-3xl overflow-hidden border border-white/15 bg-black/40 shadow-[0_22px_70px_rgba(0,0,0,0.9)] h-[260px] sm:h-[320px] lg:h-[360px]">
-              <img
-                src={`/assets/services/prod1.jpg`}
-                alt="Investment casting foundry"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Two smaller supporting photos */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-2xl overflow-hidden border border-white/12 bg-black/40 shadow-[0_16px_50px_rgba(0,0,0,0.85)] h-40 sm:h-44 lg:h-48">
-                <img
-                  src={`/assets/services/prod1.jpg`}
-                  alt="Casting detail"
+            {/* Video player container */}
+            <div className="rounded-3xl overflow-hidden border border-white/15 bg-black/40 shadow-[0_22px_70px_rgba(0,0,0,0.9)]">
+              <div className="w-full h-[360px] sm:h-[420px] lg:h-[480px] relative bg-black">
+                <video
+                  ref={videoRef}
                   className="w-full h-full object-cover"
+                  // src is set/managed in effect using videoRef for reliable playback switching
+                  muted
+                  playsInline
+                  // do not set loop here – we want sequential playback across the two sources
                 />
-              </div>
-              <div className="rounded-2xl overflow-hidden border border-white/12 bg-black/40 shadow-[0_16px_50px_rgba(0,0,0,0.85)] h-40 sm:h-44 lg:h-48">
-                <img
-                  src={`/assets/services/prod1.jpg`}
-                  alt="Inspection and quality check"
-                  className="w-full h-full object-cover"
-                />
+                {/* small overlay label */}
+                <div className="absolute left-4 top-4 px-2 py-1 bg-black/60 text-xs text-white rounded">
+                  Process — Live View
+                </div>
               </div>
             </div>
 
             <p className="text-xs sm:text-sm text-gray-300">
-              Casting, inspection and finishing are managed under one roof,
-              giving better control over quality, timing and documentation.
+              The two process videos play one after another continuously. Both are muted and played inline to ensure consistent autoplay across browsers.
             </p>
           </motion.div>
 
-          {/* Sectors / product buckets – more columns on wide screens */}
+          {/* Sectors / product buckets (kept intact) */}
           <motion.div
             initial={{ opacity: 0, x: 15 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -244,7 +290,28 @@ export default function ServicesSection() {
           </motion.div>
         </div>
 
-        {/* Capabilities strip – full width but simple */}
+        {/* Products heading + 20 images grid */}
+        <div className="mb-12">
+          <h3 className="text-2xl font-semibold text-white mb-4">Products</h3>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {productImages.map((img) => (
+              <div
+                key={img.id}
+                className="rounded-2xl overflow-hidden border border-white/12 bg-black/30 h-90 flex items-center justify-center"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Capabilities strip */}
         <motion.div
           className="rounded-3xl bg-white/5 border border-white/12 backdrop-blur-xl p-6 md:p-8 shadow-[0_14px_45px_rgba(0,0,0,0.85)] mb-12"
           initial={{ opacity: 0, y: 12 }}
@@ -300,13 +367,14 @@ export default function ServicesSection() {
 
         {/* CTA */}
         <div className="text-center">
-          <motion.button
+          <motion.a
+            href="/contact"
             whileHover={{ scale: 1.04, y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center justify-center px-9 py-3 rounded-full backdrop-blur-2xl bg-gradient-to-r from-sky-500/70 via-sky-400/80 to-sky-500/70 border border-white/30 text-white text-sm sm:text-base font-semibold shadow-[0_16px_50px_rgba(0,0,0,0.9)]"
           >
             Discuss a New Casting Project
-          </motion.button>
+          </motion.a>
         </div>
       </div>
     </section>
