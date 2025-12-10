@@ -241,16 +241,8 @@ export default function ServicesSection() {
                   playsInline
                   // do not set loop here – we want sequential playback across the two sources
                 />
-                {/* small overlay label */}
-                <div className="absolute left-4 top-4 px-2 py-1 bg-black/60 text-xs text-white rounded">
-                  Process — Live View
-                </div>
               </div>
             </div>
-
-            <p className="text-xs sm:text-sm text-gray-300">
-              The two process videos play one after another continuously. Both are muted and played inline to ensure consistent autoplay across browsers.
-            </p>
           </motion.div>
 
           {/* Sectors / product buckets (kept intact) */}
