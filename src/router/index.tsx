@@ -1,35 +1,51 @@
-// src/router/AppRouter.jsx
-import { lazy, Suspense } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import MainLayout from '../layouts/MainLayout';
-import UnderMaintenance from '../UnderMaintainance';
+import { createBrowserRouter } from "react-router-dom";
+import MainLayout from "../layouts/MainLayout";
 
-const Home = lazy(() => import('../pages/Home/Home'));
-const About = lazy(() => import('../pages/About'));
-const Services = lazy(() => import('../pages/Services'));
-const Processes = lazy(() => import('../pages/Processes'));
-const Contact = lazy(() => import('../pages/Contact'));
-const Certificates = lazy(() => import('../pages/Certificates'));
+// Pages
+import Home from "../pages/Home/Home";
+import About from "../pages/About";
+import Services from "../pages/Services";
+import Processes from "../pages/Processes";
+import Contact from "../pages/Contact";
+import Certificates from "../pages/Certificates";
+import UnderMaintenance from "../UnderMaintainance";
 
-const isMaintenanceMode = true;
+const isMaintenanceMode = true; 
+const isAdmin = localStorage.getItem("admin") === "true";
 
-const router = createBrowserRouter([
-  isMaintenanceMode && !(localStorage.getItem('admin') === 'true')
-    ? { path: '*', element: <UnderMaintenance /> }
+export const router = createBrowserRouter([
+  isMaintenanceMode && !isAdmin
+    ? {
+        path: "*",
+        element: <UnderMaintenance />,
+      }
     : {
-        path: '/',
+        path: "/",
         element: <MainLayout />,
         children: [
-          { path: '/', element: <Suspense fallback={<div>Loading...</div>}><Home/></Suspense> },
-          { path: 'about', element: <Suspense fallback={<div>Loading...</div>}><About/></Suspense> },
-          { path: 'services', element: <Suspense fallback={<div>Loading...</div>}><Services/></Suspense> },
-          { path: 'processes', element: <Suspense fallback={<div>Loading...</div>}><Processes/></Suspense> },
-          { path: 'contact', element: <Suspense fallback={<div>Loading...</div>}><Contact/></Suspense> },
-          { path: 'certificates', element: <Suspense fallback={<div>Loading...</div>}><Certificates/></Suspense> },
+          { path: "/", element: <Home /> },
+          { path: "about", element: <About /> },
+          { path: "services", element: <Services /> },
+          { path: "Processes", element: <Processes /> },
+          { path: "contact", element: <Contact /> },
+          { path: "certificates", element: <Certificates /> },
         ],
       },
 ]);
 
-export default function AppRouter() {
-  return <RouterProvider router={router} />;
-}
+
+
+// Enable Admin Mode
+
+// Paste this into your browser console:
+
+// localStorage.setItem("admin", "true");
+// console.log("Admin mode enabled. Refresh the page.");
+
+// Disable Admin Mode
+// localStorage.setItem("admin", "false");
+// console.log("Admin mode disabled. Refresh the page.");
+
+// Completely Remove Admin Key (Optional)
+// localStorage.removeItem("admin");
+// console.log("Admin mode cleared. Refresh the page.");
