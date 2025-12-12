@@ -8,27 +8,36 @@ export default function Contact() {
     {
       role: "Chief Financial Officer",
       name: "Hitesh Ranpariya",
-      email: "info@padmajatechnocast.com",
-      phone: "+91 96625 12697",
+      blurb: "Oversees financial strategy, budgeting, and regulatory compliance.",
     },
     {
       role: "Chief Marketing Officer",
       name: "Krish Kotadiya",
-      email: "sales@padmajatechnocast.com",
-      phone: "+91 99981 40607",
+      blurb: "Leads strategic communication, brand development, and client outreach.",
     },
     {
       role: "Chief Operating Officer",
       name: "Jashmin Chovatiya",
-      email: "info@padmajatechnocast.com",
-      phone: "+91 88662 75204",
+      blurb: "Coordinates operations, process optimization, and delivery excellence.",
     },
     {
       role: "Manager - Marketing",
       name: "Rajesh Shendge",
-      email: "marketing@padmajatechnocast.com",
-      phone: "+91 93736 96951",
+      blurb: "Manages communication initiatives, outreach programs, and engagement.",
     },
+  ];
+
+  // Updated email labels (Option C)
+  const emails = [
+    { label: "General Support", address: "info@padmajatechnocast.com" },
+    { label: "Client Relations", address: "sales@padmajatechnocast.com" },
+    { label: "Partnerships & Outreach", address: "marketing@padmajatechnocast.com" },
+  ];
+
+  // Updated phone labels (Option C)
+  const phones = [
+    { label: "Client Relations Desk", number: "+91 99981 40607" },
+    { label: "Partnership Assistance", number: "+91 93736 96951" },
   ];
 
   return (
@@ -55,7 +64,7 @@ export default function Contact() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.7 }}
         >
-          Reach out to Padmaja Technocast LLP. Connect with our leadership team or send us a direct message below.
+          Reach out to Padmaja Technocast LLP. Connect with our leadership team or use the contact channels below.
         </motion.p>
       </section>
 
@@ -70,20 +79,83 @@ export default function Contact() {
               key={person.name}
               whileHover={{ scale: 1.06, y: -6 }}
               transition={{ duration: 0.3 }}
-              className="rounded-3xl p-6 text-center backdrop-blur-2xl bg-white/10 border border-white/20 
+              className="rounded-3xl p-6 text-center backdrop-blur-2xl bg-white/6 border border-white/10 
                 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] 
                 transition-all duration-500"
             >
+              <div className="mx-auto w-20 h-20 rounded-full bg-white/6 flex items-center justify-center mb-4">
+                <span className="text-xl font-semibold text-gray-200">
+                  {person.name.split(" ").map((n) => n[0]).join("")}
+                </span>
+              </div>
               <h3 className="text-lg font-semibold text-white mb-2">{person.role}</h3>
               <p className="text-xl font-medium text-gray-200 mb-3">{person.name}</p>
-              <p className="flex items-center justify-center gap-2 text-gray-400 mb-2 text-sm">
-                <Mail size={16} className="text-sky-400" /> {person.email}
-              </p>
-              <p className="flex items-center justify-center gap-2 text-gray-400 text-sm">
-                <Phone size={16} className="text-sky-400" /> {person.phone}
-              </p>
+              <p className="text-sm text-gray-300">{person.blurb}</p>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      {/* ---------- Contact Channels (emails + phones) ---------- */}
+      <section className="relative z-10 py-12 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          {/* Emails */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 }}
+            className="rounded-3xl p-8 backdrop-blur-2xl bg-white/6 border border-white/10"
+          >
+            <h4 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
+              Email Channels
+            </h4>
+            <p className="text-gray-300 mb-6">Choose the appropriate department for your enquiry.</p>
+            <div className="flex flex-col gap-3">
+              {emails.map((e) => (
+                <a
+                  key={e.address}
+                  href={`mailto:${e.address}`}
+                  className="flex items-center gap-4 rounded-xl p-3 hover:scale-[1.02] transition transform bg-white/4 border border-white/6"
+                >
+                  <Mail size={18} className="text-sky-300" />
+                  <div>
+                    <div className="text-sm font-medium text-gray-100">{e.label}</div>
+                    <div className="text-xs text-gray-300">{e.address}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Phones */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="rounded-3xl p-8 backdrop-blur-2xl bg-white/6 border border-white/10"
+          >
+            <h4 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
+              Contact by Phone
+            </h4>
+            <p className="text-gray-300 mb-6">Reach our support lines for quick assistance.</p>
+            <div className="flex flex-col gap-3">
+              {phones.map((p) => (
+                <a
+                  key={p.number}
+                  href={`tel:${p.number.replace(/\s+/g, "")}`}
+                  className="flex items-center gap-4 rounded-xl p-3 hover:scale-[1.02] transition transform bg-white/4 border border-white/6"
+                >
+                  <Phone size={18} className="text-sky-300" />
+                  <div>
+                    <div className="text-sm font-medium text-gray-100">{p.label}</div>
+                    <div className="text-xs text-gray-300">{p.number}</div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </motion.div>
+
         </div>
       </section>
 
@@ -92,22 +164,19 @@ export default function Contact() {
         <div className="max-w-3xl mx-auto backdrop-blur-2xl bg-white/10 border border-white/20 
           shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] 
           rounded-3xl p-10 transition-all duration-500">
+          
           <h2 className="text-3xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
             Send Us a Message
           </h2>
 
-          {/* ---------- FORM USING FORMSUBMIT.CO ---------- */}
           <form
             action="https://formsubmit.co/mytechid.999@gmail.com"
             method="POST"
             encType="multipart/form-data"
             className="space-y-6"
           >
-            {/* Hidden Config */}
             <input type="hidden" name="_subject" value="New Inquiry from Padmaja Website" />
             <input type="hidden" name="_captcha" value="false" />
-            {/* Optional Redirect */}
-            {/* <input type="hidden" name="_next" value="https://yourdomain.com/thank-you" /> */}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input

@@ -68,14 +68,6 @@ export default function ServicesSection() {
             </motion.div>
           ))}
         </div>
-
-        {/* ---------- Call to Action ---------- */}
-        <motion.div
-          whileHover={{ scale: 1.05, rotate: 1 }}
-          className="mt-14 inline-block px-8 py-3 rounded-full backdrop-blur-2xl bg-gradient-to-r from-white/10 via-white/5 to-white/10 border border-white/20 text-white font-semibold shadow-lg hover:shadow-2xl cursor-pointer transition-all duration-300"
-        >
-          Get a Quote
-        </motion.div>
       </div>
     </section>
   );

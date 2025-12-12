@@ -123,7 +123,7 @@ export default function Navbar() {
                 PADMAJA
               </span>
               <span className="block text-xs md:text-sm tracking-[0.25em] text-gray-300">
-                TECHNOCAST
+                TECHNOCAST LLP
               </span>
             </div>
           </Link>

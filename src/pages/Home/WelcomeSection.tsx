@@ -82,12 +82,6 @@ export default function WelcomeSection() {
     "Innovate continually to produce highly detailed and miniature castings.",
   ];
 
-  const stats = [
-    { label: "Years of Combined Expertise", value: "20+" },
-    { label: "Established", value: "2016" },
-    { label: "Core Focus Areas", value: "Valves • Pumps • Engineering" },
-  ];
-
   return (
     <motion.section
       className="relative py-24 min-h-screen overflow-hidden"
@@ -169,34 +163,6 @@ export default function WelcomeSection() {
               >
                 {paragraph}
               </motion.p>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          className="rounded-3xl bg-white/5 border border-white/15 backdrop-blur-2xl shadow-[0_10px_50px_rgba(0,0,0,0.6)] px-12 py-10 mb-16"
-          initial={{ opacity: 0, y: 20, scale: 0.96 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          animate={{ y: [-3, 3, -3] }}
-          // auto floating
-          transition={{
-            y: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-          }}
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                className="text-center"
-                whileHover={{ scale: 1.08 }}
-                transition={{ type: "spring", stiffness: 200 }}
-              >
-                <div className="text-4xl md:text-5xl font-extrabold text-sky-400">
-                  {stat.value}
-                </div>
-                <p className="mt-2 text-lg text-gray-300">{stat.label}</p>
-              </motion.div>
             ))}
           </div>
         </motion.div>

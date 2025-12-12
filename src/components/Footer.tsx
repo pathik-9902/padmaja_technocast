@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <img src={Logo} alt="Lotus Logo" className="w-12 h-12 drop-shadow-lg" />
             <h2 className="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
-              Padmaja Technocast
+              Padmaja Technocast LLP
             </h2>
           </div>
 
@@ -109,7 +109,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="border-t border-white/10 py-4 text-center text-gray-400 text-sm">
-        © {new Date().getFullYear()} Padmaja Technocast. All rights reserved.
+        © {new Date().getFullYear()} Padmaja Technocast LLP. All rights reserved.
       </div>
     </footer>
   );
