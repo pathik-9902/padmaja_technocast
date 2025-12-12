@@ -49,7 +49,7 @@ export default function About() {
   return (
     <div className="bg-[#111111] text-white font-sans">
       {/* Hero */}
-      <section className="relative bg-[url('/images/about/bg-industrial.jpg')] bg-cover bg-center py-20 md:py-24">
+      <section className="relative bg-cover bg-center py-20 md:py-24">
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/85" />
         <div className="relative container mx-auto px-6 text-center">
           <motion.h1
