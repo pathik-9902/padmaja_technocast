@@ -72,7 +72,7 @@ export default function Contact() {
       </section>
 
       {/* ---------- Leadership ---------- */}
-      <section className="relative z-10 py-16 px-6">
+      <section className="relative z-10 pb-16 px-6">
         <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
           Our Leadership
         </h2>
