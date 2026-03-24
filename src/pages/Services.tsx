@@ -155,12 +155,6 @@ const categorizedProducts = [
 ];
 
 /* All 20 product shots for the full gallery */
-const productImageCount = 15;
-const allProductImages = Array.from({ length: productImageCount }, (_, i) => ({
-  id: `product-${i + 1}`,
-  src: `/assets/services/prod/prod${i + 1}.webp`,
-  alt: `Product ${i + 1}`,
-}));
 
 /* ─────────────────────────────────────────────
    LIGHTBOX
@@ -505,69 +499,7 @@ export default function ServicesSection() {
           </div>
         </div>
 
-        {/* ── FULL PRODUCT GALLERY ── */}
-        <div className="mb-16">
-          <motion.div
-            className="mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div>
-              <div className="text-[11px] font-bold tracking-[0.28em] text-sky-400 uppercase mb-1">
-                All Products
-              </div>
-              <h3 className="text-2xl font-extrabold text-white">
-                Complete Gallery
-              </h3>
-            </div>
-            <p className="text-xs text-gray-400">
-              {productImageCount} precision cast components
-            </p>
-          </motion.div>
-
-          {/* 4:3 uniform grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-            {allProductImages.map((img, idx) => (
-              <motion.div
-                key={img.id}
-                initial={{ opacity: 0, scale: 0.94 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: (idx % 5) * 0.06 }}
-                whileHover={{ scale: 1.03, zIndex: 10 }}
-                onClick={() => setGalleryLightbox(img.src)}
-                className="relative overflow-hidden rounded-xl border border-white/8 bg-black/30 cursor-zoom-in shadow-[0_6px_20px_rgba(0,0,0,0.7)] group"
-                style={{ aspectRatio: "4/3" }}
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
-                  loading="lazy"
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-2 right-2 w-6 h-6 rounded-full bg-white/10 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-3 h-3 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
-                    <path d="M11 8v6M8 11h6" />
-                  </svg>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* ── CTA ── */}
+              {/* ── CTA ── */}
         <div className="text-center">
           <motion.a
             href="/contact"
