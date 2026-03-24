@@ -2,56 +2,89 @@
 
 import { Mail, Phone, Send } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState } from "react";
+
 export default function Contact() {
   const leaders = [
     {
       role: "Marketing Director",
       name: "Krish Kotadiya",
       email: "sales@padmajatechnocast.com",
-      blurb: "Leads global marketing strategy, brand development, and customer acquisition."
+      blurb:
+        "Leads global marketing strategy, brand development, and customer acquisition.",
     },
     {
       role: "Financial Director",
       name: "Hitesh Ranpariya",
       email: "info@padmajatechnocast.com",
-      blurb: "Oversees financial planning, compliance, and corporate governance."
+      blurb:
+        "Oversees financial planning, compliance, and corporate governance.",
     },
     {
       role: "Operations Director",
       name: "Jashmin Chovatiya",
       email: "info@padmajatechnocast.com",
-      blurb: "Manages plant operations, production efficiency, and delivery execution."
+      blurb:
+        "Manages plant operations, production efficiency, and delivery execution.",
     },
     {
       role: "Manager – Marketing",
       name: "Rajesh Shendge",
       email: "marketing@padmajatechnocast.com",
-      blurb: "Handles marketing communication, outreach initiatives, and customer engagement."
+      blurb:
+        "Handles marketing communication, outreach initiatives, and customer engagement.",
     },
   ];
 
-  // Updated email labels (Option C)
   const emails = [
     { label: "General Support", address: "info@padmajatechnocast.com" },
     { label: "Client Relations", address: "sales@padmajatechnocast.com" },
-    { label: "Partnerships & Outreach", address: "marketing@padmajatechnocast.com" },
+    {
+      label: "Partnerships & Outreach",
+      address: "marketing@padmajatechnocast.com",
+    },
   ];
 
-  // Updated phone labels (Option C)
   const phones = [
     { label: "Front Desk", number: "+91 84015 48799" },
     { label: "Client Relations Desk", number: "+91 99981 40607" },
   ];
 
+  function Avatar({ name }: { name: string }) {
+    const [error, setError] = useState(false);
+    const firstName = name.split(" ")[0].toLowerCase();
+    const initials = name
+      .split(" ")
+      .map((n) => n[0])
+      .join("");
+
+    return (
+      <div className="mx-auto w-28 h-36 rounded-2xl overflow-hidden bg-white/6 mb-4 flex items-center justify-center">
+        {!error ? (
+          <img
+            src={`/assets/team/${firstName}.webp`}
+            alt={name}
+            className="w-full h-full object-cover object-top"
+            onError={() => setError(true)}
+          />
+        ) : (
+          <span className="text-3xl font-semibold text-gray-200">
+            {initials}
+          </span>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="relative min-h-screen overflow-hidden text-gray-100">
-      {/* ---------- Background ---------- */}
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] via-[#2b2b2b] to-[#1a1a1a]" />
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-25 mix-blend-overlay" />
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/noise.png')] opacity-10 animate-[pulse_8s_infinite]" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none" />
 
-      {/* ---------- Header ---------- */}
+      {/* Header */}
       <section className="relative z-10 text-center py-20">
         <motion.h1
           className="text-5xl md:text-6xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400 drop-shadow-lg mb-6"
@@ -61,21 +94,24 @@ export default function Contact() {
         >
           Contact Us
         </motion.h1>
+
         <motion.p
           className="text-lg md:text-xl max-w-3xl mx-auto text-gray-300"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.7 }}
         >
-          Reach out to Padmaja Technocast LLP. Connect with our leadership team or use the contact channels below.
+          Reach out to Padmaja Technocast LLP. Connect with our leadership
+          team or use the contact channels below.
         </motion.p>
       </section>
 
-      {/* ---------- Leadership ---------- */}
+      {/* Leadership */}
       <section className="relative z-10 pb-16 px-6">
         <h2 className="text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
           Our Leadership
         </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {leaders.map((person) => (
             <motion.div
@@ -86,13 +122,15 @@ export default function Contact() {
                 shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_15px_50px_rgba(0,0,0,0.6)] 
                 transition-all duration-500"
             >
-              <div className="mx-auto w-20 h-20 rounded-full bg-white/6 flex items-center justify-center mb-4">
-                <span className="text-xl font-semibold text-gray-200">
-                  {person.name.split(" ").map((n) => n[0]).join("")}
-                </span>
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2">{person.role}</h3>
-              <p className="text-xl font-medium text-gray-200">{person.name}</p>
+              <Avatar name={person.name} />
+
+              <h3 className="text-lg font-semibold text-white mb-2">
+                {person.role}
+              </h3>
+
+              <p className="text-xl font-medium text-gray-200">
+                {person.name}
+              </p>
 
               {person.email && (
                 <a
@@ -102,16 +140,16 @@ export default function Contact() {
                   {person.email}
                 </a>
               )}
-              <p className="text-sm text-gray-300">{person.blurb}</p>
+
+              <p className="text-sm text-gray-300 mt-2">{person.blurb}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ---------- Contact Channels (emails + phones) ---------- */}
+      {/* ---------- Contact Channels ---------- */}
       <section className="relative z-10 py-12 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
-
           {/* Emails */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -122,7 +160,11 @@ export default function Contact() {
             <h4 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
               Email Channels
             </h4>
-            <p className="text-gray-300 mb-6">Choose the appropriate department for your enquiry.</p>
+
+            <p className="text-gray-300 mb-6">
+              Choose the appropriate department for your enquiry.
+            </p>
+
             <div className="flex flex-col gap-3">
               {emails.map((e) => (
                 <a
@@ -132,7 +174,9 @@ export default function Contact() {
                 >
                   <Mail size={18} className="text-sky-300" />
                   <div>
-                    <div className="text-sm font-medium text-gray-100">{e.label}</div>
+                    <div className="text-sm font-medium text-gray-100">
+                      {e.label}
+                    </div>
                     <div className="text-xs text-gray-300">{e.address}</div>
                   </div>
                 </a>
@@ -150,7 +194,11 @@ export default function Contact() {
             <h4 className="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
               Contact by Phone
             </h4>
-            <p className="text-gray-300 mb-6">Reach our support lines for quick assistance.</p>
+
+            <p className="text-gray-300 mb-6">
+              Reach our support lines for quick assistance.
+            </p>
+
             <div className="flex flex-col gap-3">
               {phones.map((p) => (
                 <a
@@ -160,14 +208,15 @@ export default function Contact() {
                 >
                   <Phone size={18} className="text-sky-300" />
                   <div>
-                    <div className="text-sm font-medium text-gray-100">{p.label}</div>
+                    <div className="text-sm font-medium text-gray-100">
+                      {p.label}
+                    </div>
                     <div className="text-xs text-gray-300">{p.number}</div>
                   </div>
                 </a>
               ))}
             </div>
           </motion.div>
-
         </div>
       </section>
 
@@ -191,54 +240,20 @@ export default function Contact() {
             <input type="hidden" name="_captcha" value="false" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <input
-                name="name"
-                type="text"
-                placeholder="Full Name"
-                required
-                className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
-              />
-              <input
-                name="email"
-                type="email"
-                placeholder="Email Address"
-                required
-                className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
-              />
+              <input name="name" type="text" placeholder="Full Name" required className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none" />
+              <input name="email" type="email" placeholder="Email Address" required className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <input
-                name="phone"
-                type="tel"
-                placeholder="Phone Number"
-                required
-                className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
-              />
-              <input
-                name="subject"
-                type="text"
-                placeholder="Subject"
-                required
-                className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
-              />
+              <input name="phone" type="tel" placeholder="Phone Number" required className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none" />
+              <input name="subject" type="text" placeholder="Subject" required className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none" />
             </div>
 
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              rows={5}
-              required
-              className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"
-            ></textarea>
+            <textarea name="message" placeholder="Your Message" rows={5} required className="w-full rounded-lg px-4 py-3 bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:ring-2 focus:ring-sky-400 outline-none"></textarea>
 
             <div>
               <label className="block mb-2 text-gray-300 text-sm">Attach File (optional)</label>
-              <input
-                name="attachment"
-                type="file"
-                className="w-full rounded-lg px-4 py-2 bg-white/10 border border-white/20 text-white"
-              />
+              <input name="attachment" type="file" className="w-full rounded-lg px-4 py-2 bg-white/10 border border-white/20 text-white" />
             </div>
 
             <motion.button
@@ -259,7 +274,10 @@ export default function Contact() {
         <h2 className="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400">
           Our Location
         </h2>
-        <p className="text-gray-300 mb-8">Visit our corporate office for inquiries and discussions.</p>
+        <p className="text-gray-300 mb-8">
+          Visit our corporate office for inquiries and discussions.
+        </p>
+
         <div className="max-w-6xl mx-auto h-96 rounded-3xl overflow-hidden border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
           <iframe
             title="Padmaja Technocast LLP Location"
@@ -267,10 +285,8 @@ export default function Contact() {
             width="100%"
             height="100%"
             style={{ border: 0 }}
-            allowFullScreen
             loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
+          />
         </div>
       </section>
     </div>

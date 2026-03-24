@@ -1,92 +1,71 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, memo } from "react";
 import { Cpu, Settings, Truck, Layers, ChevronRight, X } from "lucide-react";
 
-/* ─────────────────────────────────────────────
-   DATA
-───────────────────────────────────────────── */
-const creativeHighlights = [
+/* ---------------- DATA ---------------- */
+
+const highlights = [
   {
-    id: "precision",
+    id: "p",
     icon: Cpu,
+    tag: "DESIGN → CASTING → FINISH",
     title: "Precision as Standard",
-    tag: "Design → Casting → Finish",
-    blurb:
+    text:
       "Tolerances, surface finish and metallurgy are controlled so parts fit and perform with minimal rework.",
   },
   {
-    id: "process",
+    id: "pr",
     icon: Settings,
+    tag: "TOOLING × PROCESS",
     title: "Process-Led Execution",
-    tag: "Tooling × Process",
-    blurb:
-      "Tooling, shell-building and melting are tuned to each part, improving yield and repeatability.",
+    text:
+      "Tooling, shell-building and melting are tuned to each part improving yield and repeatability.",
   },
   {
-    id: "delivery",
+    id: "d",
     icon: Truck,
+    tag: "PACKED & READY",
     title: "Delivery Mindset",
-    tag: "Packed & Ready",
-    blurb:
-      "Castings are supplied in a condition that makes downstream machining, assembly and logistics simpler.",
+    text:
+      "Castings supplied closer to fit-and-assemble condition simplifying machining and logistics.",
   },
 ];
 
-const productBuckets = [
+const sectors = [
   {
-    id: "engineering",
     title: "General Engineering",
-    subtitle: "Reliable parts for industrial systems",
+    sub: "Reliable parts for industrial systems",
     items: ["Machine brackets", "Gear housings", "Couplings & clamps"],
   },
   {
-    id: "energy",
     title: "Power Generation & Control",
-    subtitle: "Components that endure heat and duty cycles",
+    sub: "Components that endure heat and duty cycles",
     items: ["Turbine parts", "Pump housings", "Switchgear components"],
   },
   {
-    id: "fluid",
     title: "Pumps & Valves",
-    subtitle: "Flow-critical geometry and sealing surfaces",
+    sub: "Flow-critical geometry and sealing surfaces",
     items: ["Valve bodies & seats", "Impellers", "Stems & bonnets"],
   },
   {
-    id: "automotive",
     title: "Automotive Components",
-    subtitle: "Engineered to automotive expectations",
+    sub: "Engineered to automotive expectations",
     items: ["Brackets", "Manifolds", "Steering & suspension parts"],
   },
   {
-    id: "aero",
     title: "Aerospace & Defence",
-    subtitle: "High-performance, low-mass solutions",
+    sub: "High-performance low-mass solutions",
     items: ["Structural mounts", "Fuel system parts", "Housings"],
   },
   {
-    id: "heavy",
     title: "Mining & Heavy Industry",
-    subtitle: "Duty-rated and wear-resistant",
+    sub: "Duty-rated wear-resistant",
     items: ["Wear parts", "Lifting & conveyor hardware"],
   },
 ];
 
-const capabilities = {
-  production: "650 Tons / Annum",
-  weight: "From a few grams up to 80 kg",
-  maxSize: "Up to 600 × 600 × 600 mm",
-  standards: "ASTM, AISI, DIN, EN, GOST, GIS & others",
-  finishing: [
-    "Passivation & pickling",
-    "Electro polishing & plating",
-    "Zinc / Chrome / Nickel finishes",
-  ],
-};
-
-/* Categorized images */
-const categorizedProducts = [
+const gallery = [
   {
     id: "aerospace",
     title: "Aerospace & Defence",
@@ -154,362 +133,219 @@ const categorizedProducts = [
   },
 ];
 
-/* All 20 product shots for the full gallery */
+/* ---------------- LIGHTBOX ---------------- */
 
-/* ─────────────────────────────────────────────
-   LIGHTBOX
-───────────────────────────────────────────── */
 function Lightbox({
   src,
-  alt,
-  onClose,
+  close,
 }: {
-  src: string;
-  alt: string;
-  onClose: () => void;
+  src: string | null;
+  close: () => void;
+}) {
+  if (!src) return null;
+
+  return (
+    <div
+      onClick={close}
+      className="fixed inset-0 bg-black/90 z-[999] flex items-center justify-center p-6"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative max-w-5xl w-full"
+      >
+        <img src={src} className="w-full h-auto rounded-xl" />
+        <button
+          onClick={close}
+          className="absolute top-3 right-3 bg-black/70 p-2 rounded-full"
+        >
+          <X size={18} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- CATEGORY ---------------- */
+
+const Category = memo(function Category({
+  data,
+  open,
+}: {
+  data: (typeof gallery)[0];
+  open: (s: string) => void;
 }) {
   return (
-    <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 z-[999] flex items-center justify-center bg-black/85 backdrop-blur-lg p-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={onClose}
+    <div>
+      <div
+        className="flex items-center gap-3 mb-4"
+        style={{ color: data.accent }}
       >
-        <motion.div
-          className="relative max-w-4xl w-full rounded-2xl overflow-hidden shadow-2xl"
-          initial={{ scale: 0.88, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.88, opacity: 0 }}
-          transition={{ type: "spring", damping: 22 }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          <img src={src} alt={alt} className="w-full h-auto object-contain" />
-          <button
-            onClick={onClose}
-            className="absolute top-3 right-3 p-2 rounded-full bg-black/60 text-white hover:bg-black/90 transition-colors"
+        <div className="h-px w-10" style={{ background: data.accent }} />
+        <span className="text-xs tracking-widest font-bold uppercase">
+          {data.title}
+        </span>
+        <div className="flex-1 h-px bg-white/10" />
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {data.images.map((img) => (
+          <div
+            key={img}
+            onClick={() => open(img)}
+            className="aspect-[4/3] rounded-xl overflow-hidden border border-white/10 cursor-pointer group bg-black"
           >
-            <X className="w-5 h-5" />
-          </button>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+            <img
+              src={img}
+              loading="lazy"
+              className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
   );
-}
+});
 
-/* ─────────────────────────────────────────────
-   CATEGORY BLOCK – editorial layout
-───────────────────────────────────────────── */
-function CategoryBlock({
-  category,
-  index,
-}: {
-  category: (typeof categorizedProducts)[0];
-  index: number;
-}) {
-  const [lightbox, setLightbox] = useState<string | null>(null);
+/* ---------------- MAIN ---------------- */
 
-  /* Compute grid layout classes based on count */
-  const gridClass = "grid-cols-2 sm:grid-cols-3"
-
-  return (
-    <>
-      {lightbox && (
-        <Lightbox
-          src={lightbox}
-          alt={category.title}
-          onClose={() => setLightbox(null)}
-        />
-      )}
-
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.55, delay: index * 0.07 }}
-        className="group"
-      >
-        {/* Category heading bar */}
-        <div
-          className="flex items-center gap-3 mb-4 px-1"
-          style={{ color: category.accent }}
-        >
-          <div
-            className="h-px flex-1 max-w-[32px]"
-            style={{ background: category.accent }}
-          />
-          <span className="text-xs font-bold tracking-[0.22em] uppercase opacity-90">
-            {category.title}
-          </span>
-          <div
-            className="h-px flex-1"
-            style={{ background: `linear-gradient(to right, ${category.accent}66, transparent)` }}
-          />
-        </div>
-
-        {/* Images grid */}
-        <div
-          className={`grid ${gridClass} gap-3`}
-        >
-          {category.images.map((src, imgIdx) => (
-            <motion.div
-              key={src}
-              whileHover={{ scale: 1.03, zIndex: 10 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              onClick={() => setLightbox(src)}
-              className="relative overflow-hidden rounded-2xl cursor-zoom-in border border-white/8 bg-black/40 shadow-[0_8px_28px_rgba(0,0,0,0.8)]"
-style={{ aspectRatio: "4/3", maxHeight: "400px" }}            >
-
-              <img
-                src={src}
-                alt={`${category.title} ${imgIdx + 1}`}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-
-              {/* Shimmer on hover */}
-              <div
-                className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 z-20"
-                style={{
-                  background: `radial-gradient(circle at center, ${category.accent}18 0%, transparent 70%)`,
-                }}
-              />
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    </>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   MAIN COMPONENT
-───────────────────────────────────────────── */
 export default function ServicesSection() {
-  const [galleryLightbox, setGalleryLightbox] = useState<string | null>(null);
+  const [lb, setLb] = useState<string | null>(null);
 
   return (
-    <section className="relative py-20 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0b1220] via-[#161a1f] to-[#05070c]" />
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-25 mix-blend-overlay" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/60" />
+    <section className="py-20 bg-gradient-to-br from-[#0b1220] via-[#161a1f] to-[#05070c]">
+      <Lightbox src={lb} close={() => setLb(null)} />
 
-      {/* Ambient glows */}
-      <div className="pointer-events-none absolute -left-40 top-24 h-96 w-96 rounded-full bg-sky-500/12 blur-[120px]" />
-      <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-violet-500/10 blur-[120px]" />
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-64 w-64 -translate-x-1/2 rounded-full bg-emerald-500/8 blur-[100px]" />
-
-      {/* Optional lightbox for main gallery */}
-      {galleryLightbox && (
-        <Lightbox
-          src={galleryLightbox}
-          alt="Product"
-          onClose={() => setGalleryLightbox(null)}
-        />
-      )}
-
-      <div className="relative z-10 w-full mx-auto px-4 sm:px-8 lg:px-16">
-        {/* ── HEADER ── */}
+      <div className="max-w-7xl mx-auto px-6">
+        {/* HEADER */}
         <div className="text-center mb-16">
-          <motion.div
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/8 px-4 py-1.5 text-xs text-sky-100 backdrop-blur mb-5"
-            initial={{ opacity: 0, y: -6 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-          >
-            <Layers className="w-3.5 h-3.5 text-sky-300" />
+          <div className="inline-flex gap-2 items-center text-xs bg-white/10 border border-white/20 px-4 py-1 rounded-full mb-5">
+            <Layers size={14} />
             Investment Casting Services & Capabilities
-          </motion.div>
+          </div>
 
-          <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-white to-sky-400 drop-shadow-xl"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <h2 className="text-4xl md:text-6xl font-extrabold text-white">
             Services — Simple, Precise, Dependable
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            className="mt-4 max-w-3xl mx-auto text-sm sm:text-base text-gray-300 leading-relaxed"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            From tooling to finished castings, we focus on stable processes and
-            clear communication, so parts arrive as promised and ready for your
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+            Stable processes and clear communication so parts arrive ready for
             machining and assembly.
-          </motion.p>
+          </p>
         </div>
 
-        {/* ── HIGHLIGHTS ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          {creativeHighlights.map((h, idx) => (
-            <motion.div
+        {/* HIGHLIGHTS */}
+        <div className="grid md:grid-cols-3 gap-6 mb-20">
+          {highlights.map((h) => (
+            <div
               key={h.id}
-              whileHover={{ y: -6 }}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="relative rounded-2xl p-6 bg-white/5 border border-white/10 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.8)]"
+              className="rounded-2xl p-6 bg-white/5 border border-white/10"
             >
-              <div className="absolute -top-10 -right-10 h-24 w-24 rounded-full bg-sky-400/8 blur-3xl" />
-              <div className="relative flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-black/40 border border-white/12 flex-shrink-0">
-                  <h.icon className="w-5 h-5 text-sky-300" />
-                </div>
-                <div>
-                  <div className="text-[11px] font-bold tracking-widest text-sky-300 uppercase mb-1">
-                    {h.tag}
-                  </div>
-                  <div className="text-base font-semibold text-white mb-2">
-                    {h.title}
-                  </div>
-                  <div className="text-xs text-gray-300 leading-relaxed">
-                    {h.blurb}
-                  </div>
-                </div>
+              <h.icon className="text-sky-300 mb-3" />
+              <div className="text-xs text-sky-300 tracking-widest">
+                {h.tag}
               </div>
-            </motion.div>
+              <div className="text-white font-semibold mt-1">{h.title}</div>
+              <p className="text-gray-400 text-sm mt-2">{h.text}</p>
+            </div>
           ))}
         </div>
 
-        {/* ── SECTORS + CAPABILITIES SPLIT ── */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-10 mb-20">
-          {/* Sectors */}
-          <motion.div
-            initial={{ opacity: 0, x: -15 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="flex items-center gap-2 mb-5">
-              <Layers className="w-5 h-5 text-sky-300" />
-              <h3 className="text-xl md:text-2xl font-semibold text-white">
-                Sectors & Typical Components
-              </h3>
-            </div>
+        {/* SECTORS + CAPABILITIES */}
+        <div className="grid xl:grid-cols-2 gap-10 mb-20">
+          <div>
+            <h3 className="text-2xl text-white mb-6 font-semibold">
+              Sectors & Typical Components
+            </h3>
+
             <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
-              {productBuckets.map((bucket) => (
+              {sectors.map((s) => (
                 <div
-                  key={bucket.id}
-                  className="rounded-2xl bg-white/5 border border-white/10 p-4 backdrop-blur-xl shadow-[0_10px_32px_rgba(0,0,0,0.6)] h-full hover:border-sky-400/30 transition-colors duration-300"
+                  key={s.title}
+                  className="rounded-2xl bg-white/5 border border-white/10 p-4"
                 >
-                  <div className="text-sm font-semibold text-white mb-0.5">
-                    {bucket.title}
-                  </div>
-                  <div className="text-xs text-sky-300/70 mb-2">
-                    {bucket.subtitle}
-                  </div>
-                  <ul className="text-xs text-gray-300 space-y-1">
-                    {bucket.items.map((item) => (
-                      <li key={item} className="flex items-start gap-1.5">
-                        <ChevronRight className="w-3 h-3 text-sky-400 flex-shrink-0 mt-0.5" />
-                        {item}
-                      </li>
+                  <div className="text-white font-semibold">{s.title}</div>
+                  <div className="text-sky-300 text-xs mb-2">{s.sub}</div>
+
+                  <ul className="text-gray-400 text-sm space-y-1">
+                    {s.items.map((i) => (
+                      <li key={i}>› {i}</li>
                     ))}
                   </ul>
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          {/* Capabilities */}
-          <motion.div
-            initial={{ opacity: 0, x: 15 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="rounded-3xl bg-white/5 border border-white/12 backdrop-blur-xl p-6 md:p-8 shadow-[0_14px_45px_rgba(0,0,0,0.85)] flex flex-col justify-center"
-          >
-            <div className="grid sm:grid-cols-2 gap-8 text-sm text-gray-200">
+          <div className="rounded-3xl bg-white/5 border border-white/10 p-8">
+            <div className="grid sm:grid-cols-2 gap-8">
               <div>
-                <h4 className="text-base md:text-lg font-semibold text-white mb-4">
+                <h4 className="text-white text-lg font-semibold mb-4">
                   Key Capabilities
                 </h4>
-                <ul className="space-y-3">
-                  {[
-                    ["Production capacity", capabilities.production],
-                    ["Weight range", capabilities.weight],
-                    ["Maximum casting size", capabilities.maxSize],
-                    ["Material standards", capabilities.standards],
-                  ].map(([label, value]) => (
-                    <li key={label} className="flex flex-col gap-0.5">
-                      <span className="text-[11px] text-gray-400 uppercase tracking-wider">
-                        {label}
-                      </span>
-                      <span className="text-sky-200 font-semibold text-sm">
-                        {value}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+
+                <div className="text-sm text-gray-400 space-y-3">
+                  <div>
+                    <div className="text-xs">Production Capacity</div>
+                    <div className="text-sky-300 font-semibold">
+                      650 Tons / Annum
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-xs">Weight Range</div>
+                    <div className="text-sky-300 font-semibold">
+                      From few grams to 80kg
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-xs">Maximum Casting Size</div>
+                    <div className="text-sky-300 font-semibold">
+                      Up to 600 × 600 × 600 mm
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-xs">Material Standards</div>
+                    <div className="text-sky-300 font-semibold">
+                      ASTM, AISI, DIN, EN, GOST, GIS
+                    </div>
+                  </div>
+                </div>
               </div>
+
               <div>
-                <h4 className="text-base md:text-lg font-semibold text-white mb-4">
+                <h4 className="text-white text-lg font-semibold mb-4">
                   Finishing & Value Addition
                 </h4>
-                <ul className="space-y-2.5">
-                  {[
-                    ...capabilities.finishing,
-                    "Parts supplied closer to fit-and-assemble condition",
-                  ].map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-xs text-gray-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0 mt-1.5" />
-                      {f}
-                    </li>
-                  ))}
+
+                <ul className="text-gray-400 text-sm space-y-2">
+                  <li>• Passivation & pickling</li>
+                  <li>• Electro polishing & plating</li>
+                  <li>• Zinc / Chrome / Nickel finishes</li>
+                  <li>• Parts supplied near fit-assemble condition</li>
                 </ul>
               </div>
             </div>
-          </motion.div>
-        </div>
-
-        {/* ── PRODUCTS BY CATEGORY ── */}
-        <div className="mb-20">
-          <motion.div
-            className="mb-10 text-center"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="text-[11px] font-bold tracking-[0.28em] text-sky-400 uppercase mb-2">
-              Our Portfolio
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-              Products by Category
-            </h3>
-            <p className="mt-2 text-sm text-gray-400 max-w-xl mx-auto">
-              Precision investment castings across industries — click any image
-              to enlarge.
-            </p>
-          </motion.div>
-
-          <div className="space-y-12">
-            {categorizedProducts.map((cat, i) => (
-              <CategoryBlock key={cat.id} category={cat} index={i} />
-            ))}
           </div>
         </div>
 
-              {/* ── CTA ── */}
+        {/* GALLERY */}
+        <div className="space-y-14 mb-20">
+          {gallery.map((g) => (
+            <Category key={g.id} data={g} open={(s) => setLb(s)} />
+          ))}
+        </div>
+
+        {/* CTA */}
         <div className="text-center">
-          <motion.a
+          <a
             href="/contact"
-            whileHover={{ scale: 1.04, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center justify-center gap-2 px-9 py-3.5 rounded-full backdrop-blur-2xl bg-gradient-to-r from-sky-500/70 via-sky-400/80 to-sky-500/70 border border-white/30 text-white text-sm sm:text-base font-semibold shadow-[0_16px_50px_rgba(0,0,0,0.9)] hover:shadow-sky-500/20"
+            className="inline-flex items-center gap-2 px-10 py-4 rounded-full bg-sky-500 hover:bg-sky-600 text-white font-semibold transition"
           >
-            Discuss a New Casting Project
-            <ChevronRight className="w-4 h-4" />
-          </motion.a>
+            Discuss New Casting Project
+            <ChevronRight size={18} />
+          </a>
         </div>
       </div>
     </section>
