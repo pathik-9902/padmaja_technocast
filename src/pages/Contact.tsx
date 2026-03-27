@@ -231,11 +231,22 @@ export default function Contact() {
           </h2>
 
           <form
-            action="https://formsubmit.co/mytechid.999@gmail.com"
-            method="POST"
-            encType="multipart/form-data"
-            className="space-y-6"
-          >
+  onSubmit={async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    await fetch("https://formsubmit.co/ajax/sales@padmajatechnocast.com", {
+      method: "POST",
+      body: formData,
+    });
+
+    alert("✅ Message sent successfully!");
+    e.currentTarget.reset();
+  }}
+  encType="multipart/form-data"
+  className="space-y-6"
+>
             <input type="hidden" name="_subject" value="New Inquiry from Padmaja Website" />
             <input type="hidden" name="_captcha" value="false" />
 
